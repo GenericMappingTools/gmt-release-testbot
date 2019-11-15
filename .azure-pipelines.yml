@@ -3,6 +3,11 @@
 
 # Only build the master branch, tags and PRs (on by default) to avoid building
 # random branches in the repository until a PR is opened
+trigger:
+  branches:
+    include:
+    - master
+    - refs/tags/*
 
 jobs:
 
