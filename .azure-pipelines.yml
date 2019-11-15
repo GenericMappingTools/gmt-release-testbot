@@ -92,5 +92,8 @@ jobs:
   - bash: bash install-gmt-via-macports.sh
     displayName: Install GMT via Macports
 
+  - bash: echo "##vso[task.prependpath]/opt/local/bin"
+    displayName: Set PATH
+
   - bash: bash test-gmt.sh
     displayName: Run tests
