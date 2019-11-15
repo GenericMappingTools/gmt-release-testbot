@@ -22,6 +22,14 @@ jobs:
     displayName: Install GMT via Bundle
 
   - bash: |
+      echo "##vso[task.setvariable variable=GMTHOME]/Applications/GMT-6.0.0.app/Contents/Resources"
+      echo "##vso[task.setvariable variable=PROJ_LIB]$GMTHOME/share/proj6"
+      echo "##vso[task.setvariable variable=MAGICK_CONFIGURE_PATH]$GMTHOME/lib/GraphicsMagick-1.3.33/config"
+      echo "##vso[task.prependpath]$GMTHOME/bin"
+    displayName: Set enviromental variables and PATH
+
+
+  - bash: |
       echo ${PATH}
       bash test-gmt.sh
     displayName: Run tests

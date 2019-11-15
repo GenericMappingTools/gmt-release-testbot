@@ -11,8 +11,4 @@ sudo hdiutil attach ${GMT_PACKAGE_FULLNAME}
 cp -rf /Volumes/${GMT_PACKAGE_NAME}/GMT-${GMT_VERSION}.app /Applications
 sudo hdiutil unmount /Volumes/${GMT_PACKAGE_NAME}
 
-export GMTHOME=/Applications/GMT-${GMT_VERSION}.app/Contents/Resources
-export PROJ_LIB=${GMTHOME}/share/proj6
-export MAGICK_CONFIGURE_PATH=$GMTHOME/lib/GraphicsMagick-1.3.33/config
-export PATH=${GMTHOME}/bin:${PATH}
 set +x +e
