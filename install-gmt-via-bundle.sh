@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
+#
+# Install GMT macOS bundle
+#
 
-set -x -e
-GMT_BUNDLE="http://mirrors.ustc.edu.cn/gmt/bin/gmt-6.0.0-darwin-x86_64.dmg"
-GMT_PACKAGE_FULLNAME=$(basename ${GMT_BUNDLE})
-GMT_PACKAGE_NAME=${GMT_PACKAGE_FULLNAME%.*}
-GMT_VERSION=$(echo ${GMT_PACKAGE_NAME} | cut -d- -f2)
+set -e
 
-wget --quiet -c ${GMT_BUNDLE}
-sudo hdiutil attach ${GMT_PACKAGE_FULLNAME}
-cp -rf /Volumes/${GMT_PACKAGE_NAME}/GMT-${GMT_VERSION}.app /Applications
-sudo hdiutil unmount /Volumes/${GMT_PACKAGE_NAME}
+GMT_BUNDLE_FULLNAME=$(basename ${GMT_BUNDLE_URL})
+GMT_BUNDLE_NAME=${GMT_BUNDLE_FULLNAME%.*}
+GMT_VERSION=$(echo ${GMT_BUNDLE_NAME} | cut -d- -f2)
 
-set +x +e
+# Download bundle
+wget --quiet ${GMT_BUNDLE_URL}
+
+# Install bundle
+sudo hdiutil attach ${GMT_BUNDLE_FULLNAME}
+cp -rf /Volumes/${GMT_BUNDLE_NAME}/GMT-${GMT_VERSION}.app /Applications/GMT.app
+sudo hdiutil unmount /Volumes/${GMT_BUNDLE_NAME}
+
+set +e
