@@ -18,9 +18,9 @@ jobs:
 
   strategy:
     matrix:
-      macOS_10.14:
+      macOS_1014:
         imageName: 'macOS-10.14'
-      macOS_10.13:
+      macOS_1013:
         imageName: 'macOS-10.13'
   pool:
     vmImage: $(imageName)
