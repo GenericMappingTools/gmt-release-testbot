@@ -58,7 +58,7 @@ jobs:
 # macOS Homebrew
 ################################################################################
 - job:
-  displayName: 'Homebrew'
+  displayName: 'Homebrew - '
   condition: eq(variables['TEST_HOMEBREW'], true)
 
   strategy:
@@ -83,7 +83,7 @@ jobs:
 # macOS Macports
 ################################################################################
 - job:
-  displayName: 'Macports'
+  displayName: 'Macports -'
   condition: eq(variables['TEST_MACPORTS'], true)
 
   strategy:
