@@ -20,7 +20,7 @@ jobs:
     vmImage: 'macOS-10.14'
 
   variables:
-    GMT_BUNDLE: http://mirrors.ustc.edu.cn/gmt/bin/gmt-6.0.0-darwin-x86_64.dmg
+    GMT_BUNDLE_URL: http://mirrors.ustc.edu.cn/gmt/bin/gmt-6.0.0-darwin-x86_64.dmg
 
   steps:
   - bash: bash install-gmt-via-bundle.sh
