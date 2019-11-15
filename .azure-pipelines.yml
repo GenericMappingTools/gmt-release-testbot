@@ -9,12 +9,20 @@ trigger:
     - master
     - refs/tags/*
 
+# global variables to enable/disable jobs
+variables:
+  TEST_BUNDLE   : true
+  TEST_HOMEBREW : true
+  TEST_MACPORTS : true
+
+
 jobs:
 
 # macOS Bundle
 ################################################################################
 - job:
-  displayName: 'macOS Bundle | '
+  displayName: 'Bundle'
+  condition: eq(variables['TEST_BUNDLE'], true)
 
   strategy:
     matrix:
@@ -50,7 +58,8 @@ jobs:
 # macOS Homebrew
 ################################################################################
 - job:
-  displayName: 'macOS Homebrew | '
+  displayName: 'Homebrew'
+  condition: eq(variables['TEST_HOMEBREW'], true)
 
   strategy:
     matrix:
@@ -74,7 +83,8 @@ jobs:
 # macOS Macports
 ################################################################################
 - job:
-  displayName: 'macOS Macports | '
+  displayName: 'Macports'
+  condition: eq(variables['TEST_MACPORTS'], true)
 
   strategy:
     matrix:
