@@ -16,5 +16,7 @@ jobs:
   - bash: source install-gmt-via-bundle.sh
     displayName: Install GMT via Bundle
 
-  - bash: bash test-gmt.sh
+  - bash: |
+      echo ${PATH}
+      bash test-gmt.sh
     displayName: Run tests
