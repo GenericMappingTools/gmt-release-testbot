@@ -46,3 +46,27 @@ jobs:
 
   - bash: bash test-gmt.sh
     displayName: Run tests
+
+# macOS Homebrew
+################################################################################
+- job:
+  displayName: 'macOS Homebrew | '
+
+  strategy:
+    matrix:
+      macOS1014:
+        imageName: 'macOS-10.14'
+      macOS1013:
+        imageName: 'macOS-10.13'
+  pool:
+    vmImage: $(imageName)
+
+  steps:
+  - bash: sw_vers -productVersion
+    displayName: Check macOS version
+
+  - bash: bash install-gmt-via-homebrew.sh
+    displayName: Install GMT via Homebrew
+
+  - bash: bash test-gmt.sh
+    displayName: Run tests
