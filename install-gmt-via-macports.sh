@@ -10,4 +10,9 @@ cd MacPorts-2.6.2
 export PATH=/opt/local/bin:${PATH}
 sudo port -v selfupdate
 
+# Install GMT
+sudo port install gdal +hdf5 +netcdf +openjpeg
+sudo port install gmt6
+sudo port install graphicsmagick ffmpeg
+
 set +x
