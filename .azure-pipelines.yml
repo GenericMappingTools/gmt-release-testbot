@@ -70,3 +70,27 @@ jobs:
 
   - bash: bash test-gmt.sh
     displayName: Run tests
+
+# macOS Macports
+################################################################################
+- job:
+  displayName: 'macOS Macports | '
+
+  strategy:
+    matrix:
+      macOS1014:
+        imageName: 'macOS-10.14'
+      macOS1013:
+        imageName: 'macOS-10.13'
+  pool:
+    vmImage: $(imageName)
+
+  steps:
+  - bash: sw_vers -productVersion
+    displayName: Check macOS version
+
+  - bash: bash install-gmt-via-macports.sh
+    displayName: Install GMT via Macports
+
+  - bash: bash test-gmt.sh
+    displayName: Run tests
