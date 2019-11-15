@@ -1,0 +1,48 @@
+# Configuration for Azure Pipelines
+################################################################################
+
+# Only build the master branch, tags and PRs (on by default) to avoid building
+# random branches in the repository until a PR is opened
+trigger:
+  branches:
+    include:
+    - master
+    - refs/tags/*
+
+jobs:
+
+# macOS Bundle
+################################################################################
+- job:
+  displayName: 'macOS Bundle | '
+
+  strategy:
+    matrix:
+      macOS1014:
+        imageName: 'macOS-10.14'
+      macOS1013:
+        imageName: 'macOS-10.13'
+  pool:
+    vmImage: $(imageName)
+
+  variables:
+    GMT_BUNDLE_URL: http://mirrors.ustc.edu.cn/gmt/bin/gmt-6.0.0-darwin-x86_64.dmg
+
+  steps:
+  - bash: sw_vers -productVersion
+    displayName: Check macOS version
+
+  - bash: bash install-gmt-via-bundle.sh
+    displayName: Install GMT Bundle
+
+  - bash: |
+      echo "##vso[task.setvariable variable=GMTHOME]/Applications/GMT.app/Contents/Resources"
+      echo "##vso[task.setvariable variable=PROJ_LIB]$GMTHOME/share/proj6"
+      echo "##vso[task.setvariable variable=MAGICK_CONFIGURE_PATH]$GMTHOME/lib/GraphicsMagick-1.3.33/config"
+    displayName: Set enviromental variables
+
+  - bash: echo "##vso[task.prependpath]$GMTHOME/bin"
+    displayName: Set PATH
+
+  - bash: bash test-gmt.sh
+    displayName: Run tests
