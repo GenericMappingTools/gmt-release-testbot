@@ -11,16 +11,16 @@ trigger:
 
 jobs:
 
-# macOS | Install GMT via Bundle
+# macOS Bundle
 ################################################################################
 - job:
-  displayName: 'macOS | Install GMT via Bundle'
+  displayName: 'macOS Bundle | '
 
   strategy:
     matrix:
-      macOS_1014:
+      macOS1014:
         imageName: 'macOS-10.14'
-      macOS_1013:
+      macOS1013:
         imageName: 'macOS-10.13'
   pool:
     vmImage: $(imageName)
@@ -29,8 +29,11 @@ jobs:
     GMT_BUNDLE_URL: http://mirrors.ustc.edu.cn/gmt/bin/gmt-6.0.0-darwin-x86_64.dmg
 
   steps:
+  - bash: sw_vers -productVersion
+    displayName: Check macOS version
+
   - bash: bash install-gmt-via-bundle.sh
-    displayName: Install GMT via Bundle
+    displayName: Install GMT Bundle
 
   - bash: |
       echo "##vso[task.setvariable variable=GMTHOME]/Applications/GMT.app/Contents/Resources"
