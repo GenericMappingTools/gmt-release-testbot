@@ -1,0 +1,20 @@
+# Configuration for Azure Pipelines
+################################################################################
+
+# Only build the master branch, tags and PRs (on by default) to avoid building
+# random branches in the repository until a PR is opened
+
+jobs:
+
+- job:
+  displayName: 'macOS | Install GMT via Bundle'
+
+  pool:
+    vmImage: 'macOS-10.14'
+
+  steps:
+  - bash: source install-gmt-via-bundle.sh
+    displayName: Install GMT via Bundle
+
+  - bash: bash test-gmt.sh
+    displayName: Run tests
