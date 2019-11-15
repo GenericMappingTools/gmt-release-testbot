@@ -13,7 +13,7 @@ trigger:
 variables:
   TEST_BUNDLE   : true
   TEST_HOMEBREW : true
-  TEST_MACPORTS : false
+  TEST_MACPORTS : true
 
 
 jobs:
