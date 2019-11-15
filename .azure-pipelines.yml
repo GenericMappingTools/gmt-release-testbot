@@ -21,7 +21,7 @@ jobs:
 # macOS Bundle
 ################################################################################
 - job:
-  displayName: 'Bundle'
+  displayName: 'Bundle - '
   condition: eq(variables['TEST_BUNDLE'], true)
 
   strategy:
