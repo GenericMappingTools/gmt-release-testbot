@@ -16,8 +16,14 @@ jobs:
 - job:
   displayName: 'macOS | Install GMT via Bundle'
 
+  strategy:
+    matrix:
+      macOS_10.14:
+        imageName: 'macOS-10.14'
+      macOS_10.13:
+        imageName: 'macOS-10.13'
   pool:
-    vmImage: 'macOS-10.14'
+    vmImage: $(imageName)
 
   variables:
     GMT_BUNDLE_URL: http://mirrors.ustc.edu.cn/gmt/bin/gmt-6.0.0-darwin-x86_64.dmg
@@ -35,7 +41,5 @@ jobs:
   - bash: echo "##vso[task.prependpath]$GMTHOME/bin"
     displayName: Set PATH
 
-  - bash: |
-      echo ${PATH}
-      bash test-gmt.sh
+  - bash: bash test-gmt.sh
     displayName: Run tests
