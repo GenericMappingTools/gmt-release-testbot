@@ -120,10 +120,10 @@ jobs:
   - bash: echo "##vso[task.prependpath]$CONDA/bin"
     displayName: Add conda to PATH
 
-  - bash: |
-      conda create --yes --quiet --name gmt --channel conda-forge gmt
-      source activate gmt
+  - bash: conda create --yes --quiet --name gmt --channel conda-forge gmt
     displayName: Create Anaconda environment
 
-  - bash: bash test-gmt.sh
+  - bash: |
+      source activate gmt
+      bash test-gmt.sh
     displayName: Run tests
