@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-set -x
+set -x -e
 
 # check GMT version
 gmt --version
@@ -31,3 +31,5 @@ gmt end
 EOF
 gmt movie globe.sh -Nglobe -T12 -Fmp4 -C6ix6ix100 -Lf -Vd
 gmt movie globe.sh -Nglobe -T12 -Agif -C6ix6ix100 -Lf -Vd
+
+set +x +e
