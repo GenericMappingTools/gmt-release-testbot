@@ -113,8 +113,15 @@ jobs:
 - job:
   displayName: 'Conda'
 
+  strategy:
+    matrix:
+      Linux:
+        imageName: 'ubuntu-18.04'
+      macOS:
+        imageName: 'macOS-10.13'
+
   pool:
-    vmImage: 'ubuntu-latest'
+    vmImage: $(imageName)
 
   steps:
   - bash: echo "##vso[task.prependpath]$CONDA/bin"
