@@ -14,11 +14,11 @@ gmt pscoast -R0/10/0/10 -JM6i -Ba -Ggray -ENG+p1p,blue -P -Vd > test.ps
 # check GMT modern mode, GSHHG and DCW
 # NOTE: For unknown reasons, bash on Azure Pipelines runs each command with different PPID,
 # which breaks GMT's modern mode.
-if [ ${AGENT_OS} == 'Windows_NT' ]; then export GMT_SESSION_NAME=$$; fi
+if [ "${AGENT_OS}" = "Windows_NT" ]; then export GMT_SESSION_NAME=$$; fi
 gmt begin
 gmt coast -R0/10/0/10 -JM6i -Ba -Ggray -ENG+p1p,blue -Vd
 gmt end
-if [ ${AGENT_OS} == 'Windows_NT' ]; then unset GMT_SESSION_NAME; fi
+if [ "${AGENT_OS}" == "Windows_NT" ]; then unset GMT_SESSION_NAME; fi
 
 # check remote file, one-liner
 gmt grdimage @earth_relief_60m -JH10c -Baf -pdf map
@@ -32,7 +32,7 @@ gmt docs -Q coast
 # check movie in MP4 and GIF format
 # NOTE: For unknown reasons, adding GraphicsMagick to PATH in Azure Pipelines
 # fails conda's PATH
-if [ ${AGENT_OS} == 'Windows_NT' ]; then
+if [ "${AGENT_OS}" = "Windows_NT" ]; then
 	export PATH=${PATH}:'/c/Program Files/GraphicsMagick-1.3.32-Q8'
 fi
 cat > globe.sh << EOF
