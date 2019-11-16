@@ -121,7 +121,7 @@ jobs:
     displayName: Add conda to PATH
 
   - bash: |
-      conda create --yes --quiet --name gmt gmt
+      conda create --yes --quiet --name gmt --channel conda-forge gmt
       source activate gmt
     displayName: Create Anaconda environment
 
