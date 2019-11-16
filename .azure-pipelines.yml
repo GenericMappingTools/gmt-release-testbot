@@ -9,11 +9,14 @@ trigger:
     - master
     - refs/tags/*
 
-# global variables to enable/disable jobs
 variables:
-  TEST_BUNDLE   : true
-  TEST_HOMEBREW : true
-  TEST_MACPORTS : true
+  # global variables to enable/disable jobs
+  TEST_BUNDLE   : false
+  TEST_HOMEBREW : false
+  TEST_MACPORTS : false
+  # other global variables
+  # disable auto-display of figures
+  GMT_END_SHOW: off
 
 
 jobs:
@@ -21,7 +24,7 @@ jobs:
 # macOS Bundle
 ################################################################################
 - job:
-  displayName: 'Bundle - '
+  displayName: 'Bundle'
   condition: eq(variables['TEST_BUNDLE'], true)
 
   strategy:
@@ -58,7 +61,7 @@ jobs:
 # macOS Homebrew
 ################################################################################
 - job:
-  displayName: 'Homebrew - '
+  displayName: 'Homebrew'
   condition: eq(variables['TEST_HOMEBREW'], true)
 
   strategy:
@@ -83,7 +86,7 @@ jobs:
 # macOS Macports
 ################################################################################
 - job:
-  displayName: 'Macports -'
+  displayName: 'Macports'
   condition: eq(variables['TEST_MACPORTS'], true)
 
   strategy:
@@ -106,4 +109,31 @@ jobs:
     displayName: Set PATH
 
   - bash: bash test-gmt.sh
+    displayName: Run tests
+
+# conda
+################################################################################
+- job:
+  displayName: 'Conda'
+
+  strategy:
+    matrix:
+      Linux:
+        imageName: 'ubuntu-18.04'
+      macOS:
+        imageName: 'macOS-10.13'
+
+  pool:
+    vmImage: $(imageName)
+
+  steps:
+  - bash: echo "##vso[task.prependpath]$CONDA/bin"
+    displayName: Add conda to PATH
+
+  - bash: conda create --yes --quiet --name gmt --channel conda-forge gmt
+    displayName: Create Anaconda environment
+
+  - bash: |
+      source activate gmt
+      bash test-gmt.sh
     displayName: Run tests
