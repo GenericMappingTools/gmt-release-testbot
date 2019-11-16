@@ -12,7 +12,9 @@ gmt defaults -Vd
 gmt pscoast -R0/10/0/10 -JM6i -Ba -Ggray -ENG+p1p,blue -P -Vd > test.ps
 
 # check GMT modern mode, GSHHG and DCW
-gmt begin && gmt coast -R0/10/0/10 -JM6i -Ba -Ggray -ENG+p1p,blue -Vd && gmt end
+gmt begin
+gmt coast -R0/10/0/10 -JM6i -Ba -Ggray -ENG+p1p,blue
+gmt end
 
 # check remote file, one-liner
 gmt grdimage @earth_relief_60m -JH10c -Baf -pdf map

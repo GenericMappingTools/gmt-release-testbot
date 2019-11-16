@@ -14,6 +14,7 @@ variables:
   TEST_BUNDLE   : true
   TEST_HOMEBREW : true
   TEST_MACPORTS : true
+  TEST_CONDA    : true
   # other global variables
   # disable auto-display of figures
   GMT_END_SHOW  : off
@@ -115,6 +116,7 @@ jobs:
 ################################################################################
 - job:
   displayName: 'Conda'
+  condition: eq(variables['TEST_CONDA'], true)
 
   strategy:
     matrix:
@@ -122,6 +124,8 @@ jobs:
         imageName: 'ubuntu-18.04'
       macOS:
         imageName: 'macOS-10.13'
+      Windows:
+        imageName: 'windows-2019'
 
   pool:
     vmImage: $(imageName)
@@ -129,6 +133,11 @@ jobs:
   steps:
   - bash: echo "##vso[task.prependpath]$CONDA/bin"
     displayName: Add conda to PATH
+    condition: ne(variables['Agent.OS'], 'Windows_NT')
+
+  - powershell: Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
+    displayName: Add conda to PATH
+    condition: eq(variables['Agent.OS'], 'Windows_NT')
 
   - bash: conda create --yes --quiet --name gmt --channel conda-forge gmt
     displayName: Create Anaconda environment
