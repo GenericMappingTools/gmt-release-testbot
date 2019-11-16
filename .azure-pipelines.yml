@@ -11,12 +11,12 @@ trigger:
 
 variables:
   # global variables to enable/disable jobs
-  TEST_BUNDLE   : false
-  TEST_HOMEBREW : false
-  TEST_MACPORTS : false
+  TEST_BUNDLE   : true
+  TEST_HOMEBREW : true
+  TEST_MACPORTS : true
   # other global variables
   # disable auto-display of figures
-  GMT_END_SHOW: off
+  GMT_END_SHOW  : off
 
 
 jobs:
