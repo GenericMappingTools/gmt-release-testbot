@@ -107,3 +107,23 @@ jobs:
 
   - bash: bash test-gmt.sh
     displayName: Run tests
+
+# conda
+################################################################################
+- job:
+  displayName: 'Conda'
+
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  steps:
+  - bash: echo "##vso[task.prependpath]$CONDA/bin"
+    displayName: Add conda to PATH
+
+  - bash: |
+      conda create --yes --quiet --name gmt gmt
+      source activate gmt
+    displayName: Create Anaconda environment
+
+  - bash: bash test-gmt.sh
+    displayName: Run tests
