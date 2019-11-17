@@ -146,3 +146,9 @@ jobs:
       source activate gmt
       bash test-gmt.sh
     displayName: Run tests
+
+  - script: |
+      call activate gmt
+      call test-gmt.bat
+    displayName: Run Batch tests
+    condition: eq(variables['Agent.OS'], 'Windows_NT')
