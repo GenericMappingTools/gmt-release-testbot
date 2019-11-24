@@ -15,6 +15,8 @@ variables:
   TEST_HOMEBREW : true
   TEST_MACPORTS : true
   TEST_CONDA    : true
+  TEST_FEDORA   : true
+  TEST_CENTOS   : true
   # other global variables
   # disable auto-display of figures
   GMT_END_SHOW  : off
@@ -157,3 +159,64 @@ jobs:
       call test-gmt.bat
     displayName: Run Batch tests
     condition: eq(variables['Agent.OS'], 'Windows_NT')
+
+# Fedora
+################################################################################
+- job:
+  displayName: 'Fedora'
+  condition: eq(variables['TEST_FEDORA'], true)
+
+  strategy:
+    matrix:
+      v29:
+        docker_image: 'fedora:29'
+      v30:
+        docker_image: 'fedora:30'
+      v31:
+        docker_image: 'fedora:31'
+      rawhide:
+        docker_image: 'fedora:rawhide'
+
+  steps:
+  - bash: |
+      docker run -e GMT_END_SHOW -v `pwd`:`pwd` -w `pwd` --rm $(docker_image) /bin/bash -c '
+        dnf -yq install dnf-plugins-core
+        dnf -yq copr enable genericmappingtools/gmt
+        dnf -yq install gmt
+        dnf -yq install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+        dnf -yq install GraphicsMagick ffmpeg gdal
+        bash test-gmt.sh
+      '
+    displayName: Run docker
+
+# CentOS
+################################################################################
+- job:
+  displayName: 'CentOS'
+  condition: eq(variables['TEST_CENTOS'], true)
+
+  strategy:
+    matrix:
+      v6:
+        docker_image: 'centos:6'
+      v7:
+          docker_image: 'centos:7'
+
+  steps:
+  - bash: |
+      docker run -e GMT_END_SHOW -v `pwd`:`pwd` -w `pwd` --rm $(docker_image) /bin/bash -c '
+        yum -yq install epel-release
+
+        version=$(rpm -E %rhel)
+        if [ "${version}" == "6" ]; then
+            curl https://copr.fedorainfracloud.org/coprs/genericmappingtools/gmt/repo/epel-6/genericmappingtools-gmt-epel-6.repo -o /etc/yum.repos.d/genericmappingtools-gmt-epel-6.repo
+        else
+            yum -yq install yum-plugin-copr
+            yum -yq copr enable genericmappingtools/gmt
+        fi
+        yum -yq install gmt
+        yum -yq localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-$(rpm -E %rhel).noarch.rpm
+        yum -yq install GraphicsMagick ffmpeg gdal
+        bash test-gmt.sh
+      '
+    displayName: Run docker
