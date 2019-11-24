@@ -142,6 +142,11 @@ jobs:
   - bash: conda create --yes --quiet --name gmt --channel conda-forge gmt
     displayName: Create Anaconda environment
 
+  # conda-forge doesn't provide GraphicsMagick on Windows
+  - bash: choco install graphicsmagick
+    displayName: Install GraphicsMagick on Windows
+    condition: eq(variables['Agent.OS'], 'Windows_NT')
+
   - bash: |
       source activate gmt
       bash test-gmt.sh
