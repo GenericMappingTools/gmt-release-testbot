@@ -18,6 +18,13 @@ variables:
   TEST_FEDORA   : false
   TEST_CENTOS   : false
   TEST_WINDOWS  : false
+  TEST_SOURCE   : true
+  # URL for GMT Bundle
+  GMT_BUNDLE_URL    : http://mirrors.ustc.edu.cn/gmt/bin/gmt-6.0.0-darwin-x86_64.dmg
+  # URLs for GMT source packages
+  GMT_TARBALL_URL   : http://mirrors.ustc.edu.cn/gmt/gmt-6.0.0-src.tar.gz
+  GSHHG_TARBALL_URL : http://mirrors.ustc.edu.cn/gmt/gshhg-gmt-2.3.7.tar.gz
+  DCW_TARBALL_URL   : http://mirrors.ustc.edu.cn/gmt/dcw-gmt-1.1.4.tar.gz
   # other global variables
   # disable auto-display of figures
   GMT_END_SHOW  : off
@@ -39,9 +46,6 @@ jobs:
         imageName: 'macOS-10.15'
   pool:
     vmImage: $(imageName)
-
-  variables:
-    GMT_BUNDLE_URL: http://mirrors.ustc.edu.cn/gmt/bin/gmt-6.0.0-darwin-x86_64.dmg
 
   steps:
   - bash: sw_vers -productVersion
@@ -268,3 +272,26 @@ jobs:
 
   - script: call test-gmt.bat
     displayName: Run Batch tests
+
+
+# Source
+################################################################################
+- job:
+  displayName: 'Source'
+  condition: eq(variables['TEST_SOURCE'], true)
+
+  strategy:
+    matrix:
+      ubuntu1404:
+        # Ubuntu 14.04 has cmake 2.8.12
+        docker_image: 'ubuntu:14.04'
+      ubuntu1910:
+        docker_image: 'ubuntu:19.10'
+
+  steps:
+  - bash: |
+      docker run -e GMT_END_SHOW -e GMT_TARBALL_URL -e GSHHG_TARBALL_URL -e DCW_TARBALL_URL -v `pwd`:`pwd` -w `pwd` --rm $(docker_image) /bin/bash -c '
+        source install-gmt-via-source.sh
+        bash test-gmt.sh
+      '
+    displayName: Run docker
