@@ -168,12 +168,12 @@ jobs:
 
   strategy:
     matrix:
-      v29:
-        docker_image: 'fedora:29'
       v30:
         docker_image: 'fedora:30'
       v31:
         docker_image: 'fedora:31'
+      v32:
+        docker_image: 'fedora:32'
       rawhide:
         docker_image: 'fedora:rawhide'
 
