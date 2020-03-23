@@ -200,7 +200,9 @@ jobs:
       v6:
         docker_image: 'centos:6'
       v7:
-          docker_image: 'centos:7'
+        docker_image: 'centos:7'
+      v8:
+        docker_image: 'centos:8'
 
   steps:
   - bash: |
