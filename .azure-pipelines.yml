@@ -34,8 +34,8 @@ jobs:
     matrix:
       macOS1014:
         imageName: 'macOS-10.14'
-      macOS1013:
-        imageName: 'macOS-10.13'
+      macOS1015:
+        imageName: 'macOS-10.15'
   pool:
     vmImage: $(imageName)
 
@@ -71,8 +71,8 @@ jobs:
     matrix:
       macOS1014:
         imageName: 'macOS-10.14'
-      macOS1013:
-        imageName: 'macOS-10.13'
+      macOS1015:
+        imageName: 'macOS-10.15'
   pool:
     vmImage: $(imageName)
 
@@ -96,8 +96,8 @@ jobs:
     matrix:
       macOS1014:
         imageName: 'macOS-10.14'
-      macOS1013:
-        imageName: 'macOS-10.13'
+      macOS1015:
+        imageName: 'macOS-10.15'
   pool:
     vmImage: $(imageName)
 
@@ -125,7 +125,7 @@ jobs:
       Linux:
         imageName: 'ubuntu-18.04'
       macOS:
-        imageName: 'macOS-10.13'
+        imageName: 'macOS-10.15'
       Windows:
         imageName: 'windows-2019'
 
