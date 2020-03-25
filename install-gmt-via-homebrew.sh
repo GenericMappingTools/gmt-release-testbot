@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-set -x
+set -x -e
 
 brew update
 brew install gmt
 brew install ghostscript graphicsmagick ffmpeg
 
-set +x
+set +x -e

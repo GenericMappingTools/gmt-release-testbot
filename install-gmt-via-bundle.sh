@@ -3,7 +3,7 @@
 # Install GMT macOS bundle
 #
 
-set -e
+set -x -e
 
 GMT_BUNDLE_FULLNAME=$(basename ${GMT_BUNDLE_URL})
 GMT_BUNDLE_NAME=${GMT_BUNDLE_FULLNAME%.*}
@@ -17,4 +17,4 @@ sudo hdiutil attach ${GMT_BUNDLE_FULLNAME}
 cp -rf /Volumes/${GMT_BUNDLE_NAME}/GMT-${GMT_VERSION}.app /Applications/GMT.app
 sudo hdiutil unmount /Volumes/${GMT_BUNDLE_NAME}
 
-set +e
+set +x +e

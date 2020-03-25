@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -x
+set -x -e
 
 # Install macports
 wget --quiet https://distfiles.macports.org/MacPorts/MacPorts-2.6.2.tar.bz2
@@ -15,4 +15,4 @@ sudo port install gdal +hdf5 +netcdf +openjpeg
 sudo port install gmt6
 sudo port install graphicsmagick ffmpeg
 
-set +x
+set +x +e
