@@ -146,6 +146,7 @@ jobs:
   # See https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/anaconda?view=azure-devops&tabs=macos#add-conda-to-your-system-path
   - bash: sudo chown -R $USER $CONDA
     displayName: Take ownership of conda installation
+    condition: eq(variables['Agent.OS'], 'Darwin')
 
   - bash: conda create --yes --quiet --name gmt --channel conda-forge gmt
     displayName: Create Anaconda environment
