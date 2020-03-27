@@ -17,6 +17,7 @@ variables:
   TEST_CONDA    : true
   TEST_FEDORA   : true
   TEST_CENTOS   : true
+  TEST_WINDOWS  : true
   # other global variables
   # disable auto-display of figures
   GMT_END_SHOW  : off
@@ -229,3 +230,36 @@ jobs:
         bash test-gmt.sh
       '
     displayName: Run docker
+
+# Windows installer
+################################################################################
+- job:
+  displayName: 'Windows'
+  condition: eq(variables['TEST_WINDOWS'], true)
+
+  pool:
+    vmImage: 'windows-2019'
+
+  strategy:
+    matrix:
+      x86:
+        arch: 'win32'
+      x64:
+        arch: 'win64'
+
+  variables:
+    GMT_INSTALLER_URL: http://mirrors.ustc.edu.cn/gmt/bin/gmt-6.0.0-$(ARCH).exe
+
+  steps:
+  - bash: bash install-gmt-windows.sh
+    displayName: Install GMT via installers
+
+  - powershell: Write-Host "##vso[task.prependpath]C:\programs\gmt6\bin"
+    displayName: Set PATH
+
+  - bash: bash test-gmt.sh
+    displayName: Run tests
+
+  - script: |
+      call test-gmt.bat
+    displayName: Run Batch tests
