@@ -266,6 +266,5 @@ jobs:
   - bash: bash test-gmt.sh
     displayName: Run tests
 
-  - script: |
-      call test-gmt.bat
+  - script: call test-gmt.bat
     displayName: Run Batch tests
