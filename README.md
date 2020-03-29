@@ -28,6 +28,8 @@ and runs some basic commands to check their functionality.
 | Package Source | Status    |
 | -------------- | --------- |
 | conda-forge    | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=Conda&configuration=Conda%20Windows)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build/latest?definitionId=5&branchName=master) |
+| Instaler x86   | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=Windows&configuration=Windows%20x86)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build/latest?definitionId=5&branchName=master) |
+| Installer x64  | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=Windows&configuration=Windows%20x64)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build/latest?definitionId=5&branchName=master) |
 
 ### Linux
 
