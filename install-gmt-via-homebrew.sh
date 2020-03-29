@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+#
+# Install GMT via Homebrew
+#
 
 set -x -e
 

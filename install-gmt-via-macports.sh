@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+#
+# Install GMT via MacPorts
+#
 
 set -x -e
 
