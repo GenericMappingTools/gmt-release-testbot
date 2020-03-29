@@ -134,11 +134,15 @@ jobs:
     vmImage: $(imageName)
 
   steps:
-  - bash: echo "##vso[task.prependpath]$CONDA/bin"
-    displayName: Add conda to PATH
+  - bash: |
+      echo "##vso[task.prependpath]$CONDA/bin"
+      echo "##vso[task.prependpath]/c/Program Files/GraphicsMagick-1.3.32-Q8"
+    displayName: Add conda and GraphicsMagick to PATH
     condition: ne(variables['Agent.OS'], 'Windows_NT')
 
-  - powershell: Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
+  - powershell: |
+      Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
+      Write-Host "##vso[task.prependpath]C:\Program Files\GraphicsMagick-1.3.32-Q8"
     displayName: Add conda to PATH
     condition: eq(variables['Agent.OS'], 'Windows_NT')
 
@@ -254,7 +258,9 @@ jobs:
   - bash: bash install-gmt-windows.sh
     displayName: Install GMT via installers
 
-  - powershell: Write-Host "##vso[task.prependpath]C:\programs\gmt6\bin"
+  - powershell: |
+      Write-Host "##vso[task.prependpath]C:\programs\gmt6\bin"
+      Write-Host "##vso[task.prependpath]C:\Program Files\GraphicsMagick-1.3.32-Q8"
     displayName: Set PATH
 
   - bash: bash test-gmt.sh

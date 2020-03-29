@@ -22,4 +22,10 @@ gmt grdinfo @BlueMarble_60m.tiff
 REM check local documentation
 gmt docs -Q coast
 
+REM check movie in MP4 and GIF format
+echo "gmt begin" > globe.bat
+echo "gmt coast -Rg -JG%%MOVIE_FRAME%%/20/%%MOVIE_WIDTH%% -Gmaroon -Sturquoise -Bg -X0 -Y0" >> globe.bat
+echo "gmt end" >> globe.bat
+gmt movie globe.sh -Nglobe -T12 -Fmp4 -Agif -C6ix6ix100 -Lf -Vd
+
 @echo off
