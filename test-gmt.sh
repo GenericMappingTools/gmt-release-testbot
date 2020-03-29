@@ -30,11 +30,6 @@ gmt grdinfo @BlueMarble_60m.tiff
 gmt docs -Q coast
 
 # check movie in MP4 and GIF format
-# NOTE: For unknown reasons, adding GraphicsMagick to PATH in Azure Pipelines
-# fails conda's PATH
-if [ "${AGENT_OS}" = "Windows_NT" ]; then
-	export PATH=${PATH}:'/c/Program Files/GraphicsMagick-1.3.32-Q8'
-fi
 cat > globe.sh << EOF
 gmt begin
    gmt coast -Rg -JG\${MOVIE_FRAME}/20/\${MOVIE_WIDTH} -Gmaroon -Sturquoise -Bg -X0 -Y0
