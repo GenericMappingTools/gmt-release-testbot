@@ -22,7 +22,9 @@ variables:
   # URL for GMT Bundle
   GMT_BUNDLE_URL    : http://mirrors.ustc.edu.cn/gmt/bin/gmt-6.0.0-darwin-x86_64.dmg
   # URLs for GMT source packages
-  GMT_TARBALL_URL   : http://mirrors.ustc.edu.cn/gmt/gmt-6.0.0-src.tar.gz
+  #GMT_TARBALL_URL   : http://mirrors.ustc.edu.cn/gmt/gmt-6.0.0-src.tar.gz
+  # Uncomment following line to test GMT's master branch
+  GMT_TARBALL_URL   : https://github.com/GenericMappingTools/gmt/archive/master.tar.gz
   GSHHG_TARBALL_URL : http://mirrors.ustc.edu.cn/gmt/gshhg-gmt-2.3.7.tar.gz
   DCW_TARBALL_URL   : http://mirrors.ustc.edu.cn/gmt/dcw-gmt-1.1.4.tar.gz
   # other global variables
