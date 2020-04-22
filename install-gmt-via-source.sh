@@ -33,9 +33,9 @@ DCW_TARBALL_NAME=${DCW_TARBALL_FULLNAME%.tar.gz}
 DCW_VERSION=$(echo ${DCW_TARBALL_NAME} | cut -d- -f3)
 
 # Download GMT, GSHHG and DCW source tarballs
-curl -sO ${GMT_TARBALL_URL}
-curl -sO ${GSHHG_TARBALL_URL}
-curl -sO ${DCW_TARBALL_URL}
+curl -sSLO ${GMT_TARBALL_URL}
+curl -sSLO ${GSHHG_TARBALL_URL}
+curl -sSLO ${DCW_TARBALL_URL}
 
 # Extract tarballs
 tar -xf ${GMT_TARBALL_FULLNAME}
