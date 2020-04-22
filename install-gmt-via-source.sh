@@ -20,7 +20,11 @@ apt-get -qq -y install --no-install-recommends --no-install-suggests \
 
 # variables
 GMT_TARBALL_FULLNAME=$(basename ${GMT_TARBALL_URL})
-GMT_VERSION=$(echo ${GMT_TARBALL_FULLNAME} | cut -d- -f2)
+if [ "${GMT_TARBALL_FULLNAME}" = "master.tar.gz" ]; then
+	GMT_VERSION="master"
+else
+	GMT_VERSION=$(echo ${GMT_TARBALL_FULLNAME} | cut -d- -f2)
+fi
 GSHHG_TARBALL_FULLNAME=$(basename ${GSHHG_TARBALL_URL})
 GSHHG_TARBALL_NAME=${GSHHG_TARBALL_FULLNAME%.tar.gz}
 GSHHG_VERSION=$(echo ${GSHHG_TARBALL_NAME} | cut -d- -f3)
