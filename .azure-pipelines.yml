@@ -136,13 +136,11 @@ jobs:
   steps:
   - bash: |
       echo "##vso[task.prependpath]$CONDA/bin"
-      echo "##vso[task.prependpath]/c/Program Files/GraphicsMagick-1.3.32-Q8"
-    displayName: Add conda and GraphicsMagick to PATH
+    displayName: Add conda to PATH
     condition: ne(variables['Agent.OS'], 'Windows_NT')
 
   - powershell: |
       Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
-      Write-Host "##vso[task.prependpath]C:\Program Files\GraphicsMagick-1.3.32-Q8"
     displayName: Add conda to PATH
     condition: eq(variables['Agent.OS'], 'Windows_NT')
 
@@ -155,11 +153,6 @@ jobs:
 
   - bash: conda create --yes --quiet --name gmt --channel conda-forge gmt
     displayName: Create Anaconda environment
-
-  # conda-forge doesn't provide GraphicsMagick on Windows
-  - bash: choco install graphicsmagick
-    displayName: Install GraphicsMagick on Windows
-    condition: eq(variables['Agent.OS'], 'Windows_NT')
 
   - bash: |
       source activate gmt
