@@ -21,10 +21,10 @@ gmt end
 if [ "${AGENT_OS}" == "Windows_NT" ]; then unset GMT_SESSION_NAME; fi
 
 # check remote file, one-liner
-gmt grdimage @earth_relief_60m -JH10c -Baf -pdf map
+gmt grdimage @earth_relief_01d -JH10c -Baf -pdf map
 
 # check remote file and PROJ settings
-gmt grdinfo @BlueMarble_60m.tiff
+gmt grdinfo @earth_day_01d
 
 # check local documentation
 gmt docs -Q coast

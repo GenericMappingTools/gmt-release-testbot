@@ -14,10 +14,10 @@ gmt coast -R0/10/0/10 -JM6i -Ba -Ggray -ENG+p1p,blue
 gmt end
 
 REM check remote file, one-liner
-gmt grdimage @earth_relief_60m -JH10c -Baf -pdf map
+gmt grdimage @earth_relief_01d -JH10c -Baf -pdf map
 
 REM check remote file and PROJ settings
-gmt grdinfo @BlueMarble_60m.tiff
+gmt grdinfo @earth_day_01d
 
 REM check local documentation
 gmt docs -Q coast
