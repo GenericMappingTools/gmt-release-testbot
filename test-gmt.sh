@@ -26,8 +26,9 @@ gmt grdimage @earth_relief_01d -JH10c -Baf -pdf map
 # check remote file and PROJ settings
 gmt grdinfo @earth_day_01d
 
-# check local documentation
-gmt docs -Q coast
+# check if documentation is locally installed
+doc_url=$(gmt docs -Q -Vd coast)
+[[ $doc_url =~ "file:///*" ]]
 
 # check movie in MP4 and GIF format
 cat > globe.sh << EOF
