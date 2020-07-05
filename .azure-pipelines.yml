@@ -15,8 +15,8 @@ variables:
   TEST_HOMEBREW : false
   TEST_MACPORTS : false
   TEST_CONDA    : true
-  TEST_FEDORA   : false
-  TEST_CENTOS   : false
+  TEST_FEDORA   : true
+  TEST_CENTOS   : true
   TEST_WINDOWS  : true
   # other global variables
   # disable auto-display of figures
