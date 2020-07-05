@@ -28,7 +28,7 @@ gmt grdinfo @earth_day_01d
 
 # check if documentation is locally installed
 doc_url=$(gmt docs -Q -Vd coast)
-[[ $doc_url =~ "file:///*" ]]
+[[ ${url:0:8} == "file:///" ]]
 
 # check movie in MP4 and GIF format
 cat > globe.sh << EOF
