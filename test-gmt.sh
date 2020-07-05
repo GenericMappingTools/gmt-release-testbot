@@ -24,7 +24,7 @@ if [ "${AGENT_OS}" == "Windows_NT" ]; then unset GMT_SESSION_NAME; fi
 gmt grdimage @earth_relief_01d -JH10c -Baf -pdf map
 
 # check remote file and PROJ settings
-gmt grdinfo @earth_day_01d
+# gmt grdinfo @earth_day_01d
 
 # check if documentation is locally installed
 doc_url=$(gmt docs -Q -Vd coast)
