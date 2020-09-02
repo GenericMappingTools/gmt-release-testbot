@@ -41,7 +41,7 @@ jobs:
     vmImage: $(imageName)
 
   variables:
-    GMT_BUNDLE_URL: ftp://ftp.soest.hawaii.edu/pwessel/release/gmt-6.1.1-darwin-x86_64.dmg
+    GMT_BUNDLE_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-darwin-x86_64.dmg
 
   steps:
   - bash: sw_vers -productVersion
@@ -251,7 +251,7 @@ jobs:
         arch: 'win64'
 
   variables:
-    GMT_INSTALLER_URL: http://fct-gmt.ualg.pt/mirone/gmt-6.1.1-$(ARCH).exe
+    GMT_INSTALLER_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-$(ARCH).exe
 
   steps:
   - bash: bash install-gmt-windows.sh
