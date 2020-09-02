@@ -12,7 +12,7 @@ trigger:
 variables:
   # global variables to enable/disable jobs
   TEST_BUNDLE   : true
-  TEST_HOMEBREW : false
+  TEST_HOMEBREW : true
   TEST_MACPORTS : false
   TEST_CONDA    : true
   TEST_FEDORA   : false
