@@ -14,7 +14,7 @@ variables:
   TEST_BUNDLE   : true
   TEST_HOMEBREW : false
   TEST_MACPORTS : false
-  TEST_CONDA    : false
+  TEST_CONDA    : true
   TEST_FEDORA   : false
   TEST_CENTOS   : false
   TEST_WINDOWS  : true
