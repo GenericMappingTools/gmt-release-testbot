@@ -3,7 +3,7 @@
 set -x -e
 
 # check GMT version
-gmt --version
+[ "${GMT_VERSION}" == "$(gmt --version)" ]
 
 # check GMT defaults
 gmt defaults -Vd
@@ -27,7 +27,7 @@ gmt grdimage @earth_relief_01d -JH10c -Baf -pdf map
 gmt grdinfo @earth_day_01d
 
 # check local documentation
-gmt docs -Q coast
+gmt docs -Q -Vd coast
 
 # check movie in MP4 and GIF format
 cat > globe.sh << EOF
