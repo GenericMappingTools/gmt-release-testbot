@@ -186,7 +186,7 @@ jobs:
 
   steps:
   - bash: |
-      docker run -e GMT_END_SHOW -v `pwd`:`pwd` -w `pwd` --rm $(docker_image) /bin/bash -c '
+      docker run -e GMT_END_SHOW -e GMT_VERSION -v `pwd`:`pwd` -w `pwd` --rm $(docker_image) /bin/bash -c '
         dnf -yq install dnf-plugins-core
         dnf -yq copr enable genericmappingtools/gmt
         dnf -yq install gmt
@@ -213,7 +213,7 @@ jobs:
 
   steps:
   - bash: |
-      docker run -e GMT_END_SHOW -v `pwd`:`pwd` -w `pwd` --rm $(docker_image) /bin/bash -c '
+      docker run -e GMT_END_SHOW -e GMT_VERSION -v `pwd`:`pwd` -w `pwd` --rm $(docker_image) /bin/bash -c '
         yum -yq install epel-release
 
         version=$(rpm -E %rhel)
