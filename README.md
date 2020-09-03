@@ -1,5 +1,7 @@
 # Testbot for GMT releases
 
+[![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build/latest?definitionId=5&branchName=master)
+
 A testbot for checking the functionality of GMT packages from different sources.
 
 ## What does the testbot do?
@@ -9,46 +11,21 @@ from different sources (e.g. official installers, Homebrew, Macports, conda-forg
 on different platforms (macOS, Linux and Windows),
 and runs some basic commands to check their functionality.
 
-## Test Status
+## Test Matrix
 
-### macOS
-
-| Package Source | macOS version | Status    |
-| -------------- | ------------- | --------- |
-| Bundle         | macOS 10.15   | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=Bundle&configuration=Bundle%20macOS1015)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build?definitionId=5) |
-| Bundle         | macOS 10.14   | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=Bundle&configuration=Bundle%20macOS1014)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build?definitionId=5) |
-| Homebrew       | macOS 10.15   | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=Homebrew&configuration=Homebrew%20macOS1015)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build?definitionId=5) |
-| Homebrew  	 | macOS 10.14   | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=Homebrew&configuration=Homebrew%20macOS1014)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build?definitionId=5) |
-| MacPorts       | macOS 10.15    | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=Macports&configuration=Macports%20macOS1015)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build?definitionId=5) |
-| MacPorts       | macOS 10.14    | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=Macports&configuration=Macports%20macOS1014)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build?definitionId=5) |
-
-### Windows
-
-| Package Source | Status    |
-| -------------- | --------- |
-| Instaler x86   | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=Windows&configuration=Windows%20x86)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build?definitionId=5) |
-| Installer x64  | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=Windows&configuration=Windows%20x64)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build?definitionId=5) |
-
-### Linux
-
-| Package Source | Linux Distro  | Status    |
-| -------------- | ------------- | --------- |
-| Copr 			 | Fedora 30     | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=Fedora&configuration=Fedora%20v30)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build?definitionId=5) |
-| Copr		 	 | Fedora 31     | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=Fedora&configuration=Fedora%20v31)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build?definitionId=5) |
-| Copr           | Fedora 32     | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=Fedora&configuration=Fedora%20v32)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build?definitionId=5) |
-| Copr 			 | Fedora Rawhide | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=Fedora&configuration=Fedora%20rawhide)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build?definitionId=5) |
-| Copr           | CentOS 6       | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=CentOS&configuration=CentOS%20v6)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build?definitionId=5) |
-| Copr           | CentOS 7       |  [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=CentOS&configuration=CentOS%20v7)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build?definitionId=5) |
-| Copr           | CentOS 8       |  [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=CentOS&configuration=CentOS%20v8)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build?definitionId=5) |
-
-### Conda
-
-| Platform  | Status |
-| --------- | ------ |
-| macOS 10.15    | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=Conda&configuration=Conda%20macOS)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build?definitionId=5) |
-| Windows        | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=Conda&configuration=Conda%20Windows)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build?definitionId=5) |
-| Ubuntu 18.04   | [![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master&jobName=Conda&configuration=Conda%20Linux)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build?definitionId=5) |
-
+- macOS
+  - macOS Bundle (macOS 10.14, 10.15)
+  - Homebrew (macOS 10.14, 10.15)
+  - MacPorts (macOS 10.14, 10.15)
+- Windows
+  - Installer (x64, x86)
+- Linux
+  - Fedora (31, 32, 33, Rawhide)
+  - CentOS (6, 7, 8)
+- Conda
+  - macOS 10.15
+  - Windows
+  - Ubuntu 18.04
 
 ## Contributing
 
