@@ -13,7 +13,7 @@ variables:
   # global variables to enable/disable jobs
   TEST_BUNDLE   : true
   TEST_HOMEBREW : true
-  TEST_MACPORTS : false
+  TEST_MACPORTS : true
   TEST_CONDA    : true
   TEST_FEDORA   : true
   TEST_CENTOS   : true
