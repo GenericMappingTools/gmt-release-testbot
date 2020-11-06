@@ -43,6 +43,7 @@ jobs:
           echo "PROJ_LIB=${GMTHOME}/share/proj6" >> $GITHUB_ENV
           echo "MAGICK_CONFIGURE_PATH=${GMTHOME}/lib/GraphicsMagick/config" >> $GITHUB_ENV
           echo "${GMTHOME}/bin" >> $GITHUB_PATH
+        if: env.method == "Bundle"
 
       - name: Run tests
         run: bash test-gmt.sh
