@@ -11,6 +11,7 @@ on:
   - cron: '0 0 * * 0'
 
 env:
+  TEST_BUNDLE: true
   # The GMT version we're testing
   GMT_VERSION: 6.1.1
   GMT_BUNDLE_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-darwin-x86_64.dmg
@@ -19,19 +20,19 @@ jobs:
   macos-bundle:
     name: Bundle - ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    if: ${{ env.TEST_BUNDLE }} == "true"
     strategy:
       matrix:
         os: [macOS-10.15, macOS-11.0]
 
     steps:
-      # Cancel previous runs that are not completed
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.4.1
+        uses: styfle/cancel-workflow-action@0.6.0
         with:
           access_token: ${{ github.token }}
 
       - name: Checkout
-        uses: actions/checkout@v2.3.1
+        uses: actions/checkout@v2.3.4
 
       - name: Install GMT Bundle
         run: bash install-gmt-via-bundle.sh
