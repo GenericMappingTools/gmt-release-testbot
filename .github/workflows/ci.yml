@@ -10,6 +10,10 @@ on:
   schedule:
   - cron: '0 0 * * 0'
 
+env:
+  # The GMT version we're testing
+  GMT_VERSION: 6.1.1
+
 jobs:
   macos-bundle:
     name: Test macOS bundle
@@ -38,6 +42,4 @@ jobs:
           echo "/Applications/GMT.app/Contents/Resources/bin" >> $GITHUB_PATH
 
       - name: Run tests
-        run: |
-          echo $PATH
-          bash test-gmt.sh
+        run: bash test-gmt.sh
