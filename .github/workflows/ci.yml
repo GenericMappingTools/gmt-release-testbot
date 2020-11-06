@@ -13,14 +13,12 @@ on:
 env:
   # The GMT version we're testing
   GMT_VERSION: 6.1.1
+  GMT_BUNDLE_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-darwin-x86_64.dmg
 
 jobs:
   macos-bundle:
     name: Test macOS bundle
     runs-on: macos-10.15
-
-    env:
-      GMT_BUNDLE_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-darwin-x86_64.dmg
 
     steps:
       # Cancel previous runs that are not completed
