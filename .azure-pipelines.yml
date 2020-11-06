@@ -11,7 +11,6 @@ trigger:
 
 variables:
   # global variables to enable/disable jobs
-  TEST_BUNDLE   : false
   TEST_HOMEBREW : false
   TEST_MACPORTS : false
   TEST_CONDA    : false
@@ -26,43 +25,6 @@ variables:
 
 
 jobs:
-
-# macOS Bundle
-################################################################################
-- job:
-  displayName: 'Bundle'
-  condition: eq(variables['TEST_BUNDLE'], true)
-
-  strategy:
-    matrix:
-      macOS1014:
-        imageName: 'macOS-10.14'
-      macOS1015:
-        imageName: 'macOS-10.15'
-  pool:
-    vmImage: $(imageName)
-
-  variables:
-    GMT_BUNDLE_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-darwin-x86_64.dmg
-
-  steps:
-  - bash: sw_vers -productVersion
-    displayName: Check macOS version
-
-  - bash: bash install-gmt-via-bundle.sh
-    displayName: Install GMT Bundle
-
-  - bash: |
-      echo "##vso[task.setvariable variable=GMTHOME]/Applications/GMT.app/Contents/Resources"
-      echo "##vso[task.setvariable variable=PROJ_LIB]$GMTHOME/share/proj6"
-      echo "##vso[task.setvariable variable=MAGICK_CONFIGURE_PATH]$GMTHOME/lib/GraphicsMagick/config"
-    displayName: Set enviromental variables
-
-  - bash: echo "##vso[task.prependpath]$GMTHOME/bin"
-    displayName: Set PATH
-
-  - bash: bash test-gmt.sh
-    displayName: Run tests
 
 # macOS Homebrew
 ################################################################################
