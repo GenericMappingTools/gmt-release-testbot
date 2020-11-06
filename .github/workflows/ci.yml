@@ -23,7 +23,7 @@ jobs:
     strategy:
       matrix:
         os: [macOS-10.15, macOS-11.0]
-        method: [Bundle, Homebrew]
+        method: ["Bundle", "Homebrew"]
     env:
       method: ${{ matrix.method }}
 
@@ -45,9 +45,9 @@ jobs:
           echo "${GMTHOME}/bin" >> $GITHUB_PATH
         if: env.method == "Bundle"
 
-      - name: Install via Homebrew
-        run: bash install-gmt-via-homebrew.sh
-        if: env.method == "Homebrew"
+      #- name: Install via Homebrew
+      #  run: bash install-gmt-via-homebrew.sh
+      #  if: env.method == "Homebrew"
 
       - name: Run tests
         run: bash test-gmt.sh
