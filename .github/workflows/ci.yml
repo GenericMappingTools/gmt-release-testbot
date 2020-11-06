@@ -38,4 +38,6 @@ jobs:
           echo "/Applications/GMT.app/Contents/Resources/bin" >> $GITHUB_PATH
 
       - name: Run tests
-        run: bash test-gmt.sh
+        run: |
+          echo $PATH
+          bash test-gmt.sh
