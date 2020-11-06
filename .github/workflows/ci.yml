@@ -30,3 +30,12 @@ jobs:
 
       - name: Install GMT Bundle
         run: bash install-gmt-via-bundle.sh
+
+      - name: Set environmental variables
+        run: |
+          echo "PROJ_LIB=/Applications/GMT.app/Contents/Resources/share/proj6" >> $GITHUB_ENV
+          echo "MAGICK_CONFIGURE_PATH=/Applications/GMT.app/Contents/Resources/lib/GraphicsMagick/config" >> $GITHUB_ENV
+          echo "/Applications/GMT.app/Contents/Resources/bin" >> $GITHUB_PATH
+
+      - name: Run tests
+        run: bash test-gmt.sh
