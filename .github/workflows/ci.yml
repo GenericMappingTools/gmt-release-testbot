@@ -43,7 +43,7 @@ jobs:
           echo "PROJ_LIB=${GMTHOME}/share/proj6" >> $GITHUB_ENV
           echo "MAGICK_CONFIGURE_PATH=${GMTHOME}/lib/GraphicsMagick/config" >> $GITHUB_ENV
           echo "${GMTHOME}/bin" >> $GITHUB_PATH
-        if: env.method == "Bundle"
+        if: ${{ env.method == "Bundle" }}
 
       #- name: Install via Homebrew
       #  run: bash install-gmt-via-homebrew.sh
