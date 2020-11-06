@@ -23,7 +23,7 @@ jobs:
     strategy:
       matrix:
         os: [macOS-10.15, macOS-11.0]
-        method: [Bundle]
+        method: [Bundle, Homebrew]
     env:
       method: ${{ matrix.method }}
 
@@ -36,7 +36,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.4
 
-      - name: Install GMT Bundle and set environmental variables
+      - name: Install via Bundle
         run: |
           bash install-gmt-via-bundle.sh
           GMTHOME=/Applications/GMT.app/Contents/Resources
@@ -44,6 +44,10 @@ jobs:
           echo "MAGICK_CONFIGURE_PATH=${GMTHOME}/lib/GraphicsMagick/config" >> $GITHUB_ENV
           echo "${GMTHOME}/bin" >> $GITHUB_PATH
         if: env.method == "Bundle"
+
+      - name: Install via Homebrew
+        run: bash install-gmt-via-homebrew.sh
+        if: env.method == "Homebrew"
 
       - name: Run tests
         run: bash test-gmt.sh
