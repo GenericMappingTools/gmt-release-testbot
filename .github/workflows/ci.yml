@@ -20,7 +20,7 @@ jobs:
   macos-bundle:
     name: Bundle - ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    if: ${{ env.TEST_BUNDLE }} == "true"
+    if: env.TEST_BUNDLE == "true"
     strategy:
       matrix:
         os: [macOS-10.15, macOS-11.0]
