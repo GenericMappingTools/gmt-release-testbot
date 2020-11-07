@@ -11,7 +11,6 @@ trigger:
 
 variables:
   # global variables to enable/disable jobs
-  TEST_HOMEBREW : false
   TEST_MACPORTS : false
   TEST_CONDA    : false
   TEST_FEDORA   : false
@@ -25,31 +24,6 @@ variables:
 
 
 jobs:
-
-# macOS Homebrew
-################################################################################
-- job:
-  displayName: 'Homebrew'
-  condition: eq(variables['TEST_HOMEBREW'], true)
-
-  strategy:
-    matrix:
-      macOS1014:
-        imageName: 'macOS-10.14'
-      macOS1015:
-        imageName: 'macOS-10.15'
-  pool:
-    vmImage: $(imageName)
-
-  steps:
-  - bash: sw_vers -productVersion
-    displayName: Check macOS version
-
-  - bash: bash install-gmt-via-homebrew.sh
-    displayName: Install GMT via Homebrew
-
-  - bash: bash test-gmt.sh
-    displayName: Run tests
 
 # macOS Macports
 ################################################################################
