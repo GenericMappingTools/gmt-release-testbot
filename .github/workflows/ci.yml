@@ -17,6 +17,37 @@ env:
   GMT_BUNDLE_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-darwin-x86_64.dmg
 
 jobs:
+  cache-data:
+    # Linux and Windows hosts of GitHub Actions can not aceess GMT data
+    name: Cache
+    runs-on: macos-latest
+
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+
+      - name: Install via Bundle
+        run: |
+          bash install-gmt-via-bundle.sh
+          GMTHOME=/Applications/GMT.app/Contents/Resources
+          echo "PROJ_LIB=${GMTHOME}/share/proj6" >> $GITHUB_ENV
+          echo "MAGICK_CONFIGURE_PATH=${GMTHOME}/lib/GraphicsMagick/config" >> $GITHUB_ENV
+          echo "${GMTHOME}/bin" >> $GITHUB_PATH
+
+       - name: Download remote data
+         run: gmt which -Ga @earth_relief_01d @earth_day_01d
+
+       - name: Upload artifacts to GitHub
+         uses: actions/upload-artifact@v2
+         with:
+           name: gmt-cache
+           path: ~/.gmt/server
+
   macos-bundle:
     name: Bundle - ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
@@ -120,6 +151,21 @@ jobs:
       - name: Install GMT
         shell: bash -l {0}
         run: conda install --yes --quiet gmt --channel conda-forge
+
+      # Download cached remote files (artifacts) from GitHub
+      - name: Download remote data from GitHub
+        uses: dawidd6/action-download-artifact@v2.6.3
+        with:
+          name: gmt-cache
+          path: .gmt
+
+      # Move downloaded files to ~/.gmt directory and list them
+      - name: Move and list downloaded remote files
+        shell: bash -l {0}
+        run: |
+          mkdir -p ~/.gmt
+          mv .gmt/* ~/.gmt
+          ls -lh ~/.gmt
 
       - name: Run tests
         shell: bash -l {0}
