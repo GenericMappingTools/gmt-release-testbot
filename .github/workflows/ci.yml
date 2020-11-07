@@ -23,6 +23,9 @@ jobs:
     strategy:
       matrix:
         os: [macOS-10.15, macOS-11.0]
+        method: [Bundle]
+    env:
+      method: ${{ matrix.method }}
 
     steps:
       - name: Cancel Previous Runs
