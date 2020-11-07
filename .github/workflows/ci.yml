@@ -89,3 +89,32 @@ jobs:
 
       - name: Run tests
         run: bash test-gmt.sh
+
+  conda:
+    name: Conda - ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+
+      - name: Setup Miniconda
+        uses: conda-incubator/setup-miniconda@v1.7.0
+        with:
+          python-version: 3.8
+          channels: conda-forge
+          miniconda-version: "latest"
+
+      - name: Install GMT
+        run: conda install --yes --quiet gmt --channel conda-forge
+
+      - name: Run tests
+        run: bash test-gmt.sh
