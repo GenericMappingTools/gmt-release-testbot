@@ -39,14 +39,14 @@ jobs:
           echo "MAGICK_CONFIGURE_PATH=${GMTHOME}/lib/GraphicsMagick/config" >> $GITHUB_ENV
           echo "${GMTHOME}/bin" >> $GITHUB_PATH
 
-       - name: Download remote data
-         run: gmt which -Ga @earth_relief_01d @earth_day_01d
+      - name: Download remote data
+        run: gmt which -Ga @earth_relief_01d @earth_day_01d
 
-       - name: Upload artifacts to GitHub
-         uses: actions/upload-artifact@v2
-         with:
-           name: gmt-cache
-           path: ~/.gmt/server
+      - name: Upload artifacts to GitHub
+        uses: actions/upload-artifact@v2
+        with:
+          name: gmt-cache
+          path: ~/.gmt/server
 
   macos-bundle:
     name: Bundle - ${{ matrix.os }}
