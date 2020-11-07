@@ -118,7 +118,9 @@ jobs:
           miniconda-version: "latest"
 
       - name: Install GMT
+        shell: bash -l {0}
         run: conda install --yes --quiet gmt --channel conda-forge
 
       - name: Run tests
+        shell: bash -l {0}
         run: bash test-gmt.sh
