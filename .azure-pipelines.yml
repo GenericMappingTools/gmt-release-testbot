@@ -25,34 +25,6 @@ variables:
 
 jobs:
 
-# macOS Macports
-################################################################################
-- job:
-  displayName: 'Macports'
-  condition: eq(variables['TEST_MACPORTS'], true)
-
-  strategy:
-    matrix:
-      macOS1014:
-        imageName: 'macOS-10.14'
-      macOS1015:
-        imageName: 'macOS-10.15'
-  pool:
-    vmImage: $(imageName)
-
-  steps:
-  - bash: sw_vers -productVersion
-    displayName: Check macOS version
-
-  - bash: bash install-gmt-via-macports.sh
-    displayName: Install GMT via Macports
-
-  - bash: echo "##vso[task.prependpath]/opt/local/bin"
-    displayName: Set PATH
-
-  - bash: bash test-gmt.sh
-    displayName: Run tests
-
 # conda
 ################################################################################
 - job:
