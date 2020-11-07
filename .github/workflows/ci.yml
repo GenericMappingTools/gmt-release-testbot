@@ -18,14 +18,11 @@ env:
 
 jobs:
   macos-bundle:
-    name: ${{ matrix.method }} - ${{ matrix.os }}
+    name: Bundle - ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [macOS-10.15, macOS-11.0]
-        source: [Bundle]
-    env:
-      source: ${{ matrix.source }}
 
     steps:
       - name: Cancel Previous Runs
@@ -43,11 +40,29 @@ jobs:
           echo "PROJ_LIB=${GMTHOME}/share/proj6" >> $GITHUB_ENV
           echo "MAGICK_CONFIGURE_PATH=${GMTHOME}/lib/GraphicsMagick/config" >> $GITHUB_ENV
           echo "${GMTHOME}/bin" >> $GITHUB_PATH
-        if: env.source == "Bundle"
 
       - name: Run tests
         run: bash test-gmt.sh
 
-      #- name: Install via Homebrew
-      #  run: bash install-gmt-via-homebrew.sh
-      #  if: env.method == "Homebrew"
+  macos-homebrew:
+    name: Homebrew - ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macOS-10.15, macOS-11.0]
+
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+
+      - name: Install via Homebrew
+        run: bash install-gmt-via-homebrew.sh
+
+      - name: Run tests
+        run: bash test-gmt.sh
+
