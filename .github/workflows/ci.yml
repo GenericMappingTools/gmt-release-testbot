@@ -23,7 +23,7 @@ jobs:
     strategy:
       matrix:
         os: [macOS-10.15, macOS-11.0]
-        method: ["Bundle", "Homebrew"]
+        method: [Bundle, Homebrew]
     env:
       method: ${{ matrix.method }}
 
