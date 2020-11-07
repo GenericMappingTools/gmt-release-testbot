@@ -124,3 +124,8 @@ jobs:
       - name: Run tests
         shell: bash -l {0}
         run: bash test-gmt.sh
+
+      - nane: Run Batch tests
+        shell: bash -l {0}
+        run: call test-gmt.bat
+        if: ${{ runner.os == "Windows" }}
