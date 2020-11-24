@@ -154,8 +154,8 @@ jobs:
       # Download cached remote files (artifacts) from GitHub
       - name: Download remote data from GitHub
         uses: dawidd6/action-download-artifact@v2.6.3
-        workflow: ci.yml
         with:
+          workflow: ci.yml
           name: gmt-cache
           path: .gmt
 
