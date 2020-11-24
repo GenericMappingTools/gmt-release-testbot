@@ -11,7 +11,6 @@ on:
   - cron: '0 0 * * 0'
 
 env:
-  TEST_BUNDLE: true
   # The GMT version we're testing
   GMT_VERSION: 6.1.1
   GMT_BUNDLE_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-darwin-x86_64.dmg
@@ -155,6 +154,7 @@ jobs:
       # Download cached remote files (artifacts) from GitHub
       - name: Download remote data from GitHub
         uses: dawidd6/action-download-artifact@v2.6.3
+        workflow: ci.yml
         with:
           name: gmt-cache
           path: .gmt
