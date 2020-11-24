@@ -11,8 +11,6 @@ trigger:
 
 variables:
   # global variables to enable/disable jobs
-  TEST_MACPORTS : false
-  TEST_CONDA    : false
   TEST_FEDORA   : false
   TEST_CENTOS   : false
   TEST_WINDOWS  : false
@@ -28,46 +26,7 @@ jobs:
 # conda
 ################################################################################
 - job:
-  displayName: 'Conda'
-  condition: eq(variables['TEST_CONDA'], true)
-
-  strategy:
-    matrix:
-      Linux:
-        imageName: 'ubuntu-18.04'
-      macOS:
-        imageName: 'macOS-10.15'
-      Windows:
-        imageName: 'windows-2019'
-
-  pool:
-    vmImage: $(imageName)
-
   steps:
-  - bash: |
-      echo "##vso[task.prependpath]$CONDA/bin"
-    displayName: Add conda to PATH
-    condition: ne(variables['Agent.OS'], 'Windows_NT')
-
-  - powershell: |
-      Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
-    displayName: Add conda to PATH
-    condition: eq(variables['Agent.OS'], 'Windows_NT')
-
-  # On Hosted macOS, the agent user doesn't have ownership of Miniconda's installation directory.
-  # We need to take ownership if we want to update conda or install packages globally
-  # See https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/anaconda?view=azure-devops&tabs=macos#add-conda-to-your-system-path
-  - bash: sudo chown -R $USER $CONDA
-    displayName: Take ownership of conda installation
-    condition: eq(variables['Agent.OS'], 'Darwin')
-
-  - bash: conda create --yes --quiet --name gmt --channel conda-forge gmt
-    displayName: Create Anaconda environment
-
-  - bash: |
-      source activate gmt
-      bash test-gmt.sh
-    displayName: Run tests
 
   - script: |
       call activate gmt
