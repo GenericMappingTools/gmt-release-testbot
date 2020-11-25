@@ -226,5 +226,7 @@ jobs:
 
       - name: Run Batch tests
         shell: cmd
-        run: call test-gmt.bat
+        run: |
+          echo %PATH%
+          call test-gmt.bat
 
