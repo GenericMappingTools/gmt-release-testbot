@@ -198,7 +198,7 @@ jobs:
 
       - name: Run docker
         run: |
-          docker run -e GMT_END_SHOW -e GMT_VERSION -v `pwd`:`pwd` -w `pwd` --rm $(docker_image) /bin/bash -c '
+          docker run -e GMT_END_SHOW -e GMT_VERSION -v `pwd`:`pwd` -w `pwd` --rm ${{ matrix.os }} /bin/bash -c '
             dnf -yq install dnf-plugins-core
             dnf -yq copr enable genericmappingtools/gmt
             dnf -yq install gmt
