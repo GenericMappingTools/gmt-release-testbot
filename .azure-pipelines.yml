@@ -23,46 +23,6 @@ variables:
 
 jobs:
 
-# conda
-################################################################################
-- job:
-  steps:
-
-  - script: |
-      call activate gmt
-      call test-gmt.bat
-    displayName: Run Batch tests
-    condition: eq(variables['Agent.OS'], 'Windows_NT')
-
-# Fedora
-################################################################################
-- job:
-  displayName: 'Fedora'
-  condition: eq(variables['TEST_FEDORA'], true)
-
-  strategy:
-    matrix:
-      v31:
-        docker_image: 'fedora:31'
-      v32:
-        docker_image: 'fedora:32'
-      v33:
-        docker_image: 'fedora:33'
-      rawhide:
-        docker_image: 'fedora:rawhide'
-
-  steps:
-  - bash: |
-      docker run -e GMT_END_SHOW -e GMT_VERSION -v `pwd`:`pwd` -w `pwd` --rm $(docker_image) /bin/bash -c '
-        dnf -yq install dnf-plugins-core
-        dnf -yq copr enable genericmappingtools/gmt
-        dnf -yq install gmt
-        dnf -yq install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-        dnf -yq install GraphicsMagick ffmpeg gdal
-        bash test-gmt.sh
-      '
-    displayName: Run docker
-
 # CentOS
 ################################################################################
 - job:
