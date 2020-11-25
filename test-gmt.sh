@@ -5,6 +5,8 @@ set -x -e
 # check GMT version
 [ "${GMT_VERSION}" == "$(gmt --version)" ]
 
+gmt set GMT_DATA_SERVER http://china.generic-mapping-tools.org
+
 # check GMT defaults
 gmt defaults -Vd
 
