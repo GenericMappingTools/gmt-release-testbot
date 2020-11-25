@@ -181,7 +181,8 @@ jobs:
 
   docker:
     name: Docker - ${{ matrix.os }}
-    strategy: ubuntu-latest
+    runs-on: ubuntu-latest
+    strategy:
       fail-fast: false
       matrix:
         os: ["fedora:31", "fedora:32", "fedora:33", "fedora:rawhide"]
