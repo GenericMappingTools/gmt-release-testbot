@@ -23,46 +23,6 @@ variables:
 
 jobs:
 
-# CentOS
-################################################################################
-- job:
-  displayName: 'CentOS'
-  condition: eq(variables['TEST_CENTOS'], true)
-
-  strategy:
-    matrix:
-      v6:
-        docker_image: 'centos:6'
-      v7:
-        docker_image: 'centos:7'
-      v8:
-        docker_image: 'centos:8'
-
-  steps:
-  - bash: |
-      docker run -e GMT_END_SHOW -e GMT_VERSION -v `pwd`:`pwd` -w `pwd` --rm $(docker_image) /bin/bash -c '
-        yum -yq install epel-release
-
-        version=$(rpm -E %rhel)
-        if [ "${version}" == "6" ]; then
-            curl https://copr.fedorainfracloud.org/coprs/genericmappingtools/gmt/repo/epel-6/genericmappingtools-gmt-epel-6.repo -o /etc/yum.repos.d/genericmappingtools-gmt-epel-6.repo
-        else
-            yum -yq install yum-plugin-copr
-            yum -yq copr enable genericmappingtools/gmt
-        fi
-
-        # See https://github.com/GenericMappingTools/gmt/issues/3433
-        if [ "${version}" == "8" ]; then
-            yum config-manager --set-enabled PowerTools
-        fi
-
-        yum -yq install gmt
-        yum -yq localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-$(rpm -E %rhel).noarch.rpm
-        yum -yq install GraphicsMagick ffmpeg gdal
-        bash test-gmt.sh
-      '
-    displayName: Run docker
-
 # Windows installer
 ################################################################################
 - job:
