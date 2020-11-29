@@ -222,7 +222,9 @@ jobs:
           echo "C:/Program Files/GraphicsMagick-1.3.32-Q8" >> $GITHUB_PATH
 
       - name: Run tests
-        run: bash test-gmt.sh
+        run: |
+          echo $PATH
+          bash test-gmt.sh
 
       - name: Run Batch tests
         shell: cmd
