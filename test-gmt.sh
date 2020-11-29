@@ -16,11 +16,11 @@ gmt pscoast -R0/10/0/10 -JM6i -Ba -Ggray -ENG+p1p,blue -P -Vd > test.ps
 # check GMT modern mode, GSHHG and DCW
 # NOTE: For unknown reasons, bash on Windows from Azure Pipelines
 # runs each command with different PPID, which breaks GMT's modern mode.
-if [ "${AGENT_OS}" = "Windows_NT" ]; then export GMT_SESSION_NAME=$$; fi
+if [ "${RUNNER_OS}" == "Windows" ]; then export GMT_SESSION_NAME=$$; fi
 gmt begin
 gmt coast -R0/10/0/10 -JM6i -Ba -Ggray -ENG+p1p,blue -Vd
 gmt end
-if [ "${AGENT_OS}" == "Windows_NT" ]; then unset GMT_SESSION_NAME; fi
+if [ "${RUNNER_OS}" == "Windows" ]; then unset GMT_SESSION_NAME; fi
 
 # check remote file, one-liner
 gmt grdimage @earth_relief_01d -JH10c -Baf -pdf map
