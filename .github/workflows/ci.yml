@@ -224,7 +224,6 @@ jobs:
           echo "C:/Program Files/GraphicsMagick-1.3.32-Q8" >> $GITHUB_PATH
           echo $PATH
           echo $GITHUB_PATH
-          cat $GITHUB_PATH
           ls "/c/programs/gmt6/bin/*"
 
       - name: Run tests
