@@ -1,6 +1,6 @@
 # Testbot for GMT releases
 
-[![Build Status](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_apis/build/status/GenericMappingTools.gmt-release-testbot?branchName=master)](https://dev.azure.com/GenericMappingTools/gmt-release-test-bot/_build/latest?definitionId=5&branchName=master)
+![Test GMT releases](https://github.com/GenericMappingTools/gmt-release-testbot/workflows/Test%20GMT%20releases/badge.svg)
 
 A testbot for checking the functionality of GMT packages from different sources.
 
@@ -14,14 +14,14 @@ and runs some basic commands to check their functionality.
 ## Test Matrix
 
 - macOS
-  - macOS Bundle (macOS 10.14, 10.15)
-  - Homebrew (macOS 10.14, 10.15)
-  - MacPorts (macOS 10.14, 10.15)
+  - macOS Bundle (macOS 10.15, 11.0)
+  - Homebrew (macOS 10.15, 11.0)
+  - MacPorts (macOS 10.15, 11.10)
 - Windows
   - Installer (x64, x86)
 - Linux
   - Fedora (31, 32, 33, Rawhide)
-  - CentOS (6, 7, 8)
+  - CentOS (7, 8)
 - Conda
   - macOS 10.15
   - Windows
