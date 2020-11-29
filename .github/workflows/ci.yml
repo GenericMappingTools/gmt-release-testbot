@@ -226,7 +226,10 @@ jobs:
       - name: Run tests
         run: |
           echo "C:/programs/gmt6/bin" >> $GITHUB_PATH
+          echo 'C:\programs\gmt6\bin' >> $GITHUB_PATH
+          echo "/c/programs/gmt6/bin" >> $GITHUB_PATH
           ls "C:/programs/gmt6/bin/*"
+          ls "/c/programs/gmt6/bin/*"
           echo $PATH
           bash test-gmt.sh
 
