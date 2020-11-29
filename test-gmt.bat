@@ -1,3 +1,7 @@
+REM
+REM Run GMT Tests
+REM
+
 @echo on
 REM check GMT version
 gmt --version

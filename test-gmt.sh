@@ -1,4 +1,7 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
+#
+# Run GMT tests
+#
 
 set -x -e
 
@@ -14,8 +17,8 @@ gmt defaults -Vd
 gmt pscoast -R0/10/0/10 -JM6i -Ba -Ggray -ENG+p1p,blue -P -Vd > test.ps
 
 # check GMT modern mode, GSHHG and DCW
-# NOTE: For unknown reasons, bash on Windows on GitHub Actions
-# runs each command with different PPID, which breaks GMT's modern mode.
+# Bash on Windows runs each command using different PPID, which breaks GMT's modern mode.
+# Have to set GMT_SESSION_NAME to make it work.
 if [ "${RUNNER_OS}" == "Windows" ]; then export GMT_SESSION_NAME=$$; fi
 gmt begin
 gmt coast -R0/10/0/10 -JM6i -Ba -Ggray -ENG+p1p,blue -Vd
