@@ -29,7 +29,6 @@ jobs:
     env:
       GMT_BUNDLE_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-darwin-x86_64.dmg
 
-
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.6.0
@@ -131,8 +130,8 @@ jobs:
         run: bash test-gmt.sh
 
       - name: Run Batch tests
-        shell: bash -l {0}
-        run: call test-gmt.bat
+        shell: cmd /C CALL {0}
+        run: test-gmt.bat
         if: runner.os == 'Windows'
 
   docker-fedora:
