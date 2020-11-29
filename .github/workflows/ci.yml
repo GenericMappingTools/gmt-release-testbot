@@ -1,4 +1,4 @@
-# This workflow test GMT releases on various platforms
+# This workflow tests GMT releases on various platforms
 
 name: Test GMT releases
 
@@ -7,6 +7,7 @@ on:
     branches:
     - master
   pull_request:
+  # weekly schedule job
   schedule:
   - cron: '0 0 * * 0'
 
@@ -15,8 +16,6 @@ env:
   GMT_VERSION: 6.1.1
   # disable auto-display of figures
   GMT_END_SHOW: off
-  # URLs
-  GMT_BUNDLE_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-darwin-x86_64.dmg
 
 jobs:
   macos-bundle:
@@ -26,6 +25,9 @@ jobs:
       fail-fast: false
       matrix:
         os: [macOS-10.15, macOS-11.0]
+
+    env:
+      GMT_BUNDLE_URL: https://github.com/GenericMappingTools/gmt/releases/download/${{ env.GMT_VERSION }}/gmt-${{ env.GMT_VERSION }}-darwin-x86_64.dmg
 
     steps:
       - name: Cancel Previous Runs
