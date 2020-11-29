@@ -6,7 +6,6 @@
 set -x -e
 
 brew update
-brew install gmt
-brew install ghostscript graphicsmagick ffmpeg
+brew install gmt ghostscript graphicsmagick ffmpeg
 
-set +x -e
+set +x +e
