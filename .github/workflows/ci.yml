@@ -135,7 +135,7 @@ jobs:
         if: runner.os == 'Windows'
 
   docker-fedora:
-    name: Docker - ${{ matrix.os }}
+    name: Docker - ${{ matrix.image }}
     runs-on: ubuntu-latest
     container:
       image: ${{ matrix.image }}
