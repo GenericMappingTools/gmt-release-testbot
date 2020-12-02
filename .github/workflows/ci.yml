@@ -137,10 +137,12 @@ jobs:
   docker-fedora:
     name: Docker - ${{ matrix.os }}
     runs-on: ubuntu-latest
+    container:
+      image: ${{ matrix.image }}
     strategy:
       fail-fast: false
       matrix:
-        os: ["fedora:31", "fedora:32", "fedora:33", "fedora:rawhide"]
+        image: ["fedora:31", "fedora:32", "fedora:33", "fedora:rawhide"]
 
     steps:
       - name: Cancel Previous Runs
@@ -153,14 +155,12 @@ jobs:
 
       - name: Run docker
         run: |
-          docker run -e GMT_END_SHOW -e GMT_VERSION -v `pwd`:`pwd` -w `pwd` --rm ${{ matrix.os }} /bin/bash -c '
-            dnf -yq install dnf-plugins-core
-            dnf -yq copr enable genericmappingtools/gmt
-            dnf -yq install gmt
-            dnf -yq install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-            dnf -yq install GraphicsMagick ffmpeg gdal
-            bash test-gmt.sh
-          '
+          dnf -yq install dnf-plugins-core
+          dnf -yq copr enable genericmappingtools/gmt
+          dnf -yq install gmt
+          dnf -yq install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+          dnf -yq install GraphicsMagick ffmpeg gdal
+          bash test-gmt.sh
 
   docker-centos:
     name: Docker - ${{ matrix.os }}
