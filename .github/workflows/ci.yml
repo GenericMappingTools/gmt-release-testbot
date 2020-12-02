@@ -172,7 +172,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-          os: ["centos:7", "centos:8"]
+        image: ["centos:7", "centos:8"]
 
     steps:
       - name: Cancel Previous Runs
