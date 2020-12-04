@@ -142,7 +142,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image: ["fedora:31", "fedora:32", "fedora:33", "fedora:rawhide"]
+        image: ["fedora:32", "fedora:33", "fedora:rawhide"]
 
     steps:
       - name: Cancel Previous Runs
