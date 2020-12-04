@@ -6,7 +6,7 @@
 set -x -e
 
 # Install macports
-macos_version = $(sw_vers -productVersion)
+macos_version=$(sw_vers -productVersion)
 if [[ "$macos_version" =~ "11.0" ]]; then
 	pkg="https://distfiles.macports.org/MacPorts/MacPorts-2.6.4_1-11-BigSur.pkg"
 elif [[ "$macos_version" =~ "10.15" ]]; then
