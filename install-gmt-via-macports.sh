@@ -26,4 +26,8 @@ sudo port install gdal +hdf5 +netcdf +openjpeg
 sudo port install gmt6
 sudo port install graphicsmagick ffmpeg
 
+# Add PATHs
+echo "/opt/local/bin" >> $GITHUB_PATH
+echo "/opt/local/lib/gmt6/bin" >> $GITHUB_PATH
+
 set +x +e
