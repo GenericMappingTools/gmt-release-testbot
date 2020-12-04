@@ -92,7 +92,7 @@ jobs:
       - name: Install via MacPorts
         run: |
           bash install-gmt-via-macports.sh
-          echo "/opt/local/bin" >> $GITHUB_PATH
+          echo "/opt/local/lib/gmt6/bin" >> $GITHUB_PATH
 
       - name: Run tests
         run: bash test-gmt.sh
@@ -142,7 +142,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image: ["fedora:31", "fedora:32", "fedora:33", "fedora:rawhide"]
+        image: ["fedora:32", "fedora:33", "fedora:rawhide"]
 
     steps:
       - name: Cancel Previous Runs
