@@ -20,7 +20,7 @@ and runs some basic commands to check their functionality.
 - Windows
   - Installer (x64, x86)
 - Linux
-  - Fedora (31, 32, 33, Rawhide)
+  - Fedora (32, 33, Rawhide)
   - CentOS (7, 8)
 - Conda
   - macOS 10.15
