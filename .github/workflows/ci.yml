@@ -21,13 +21,14 @@ env:
   GMT_BUNDLE_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-darwin-x86_64.dmg
 
 jobs:
-  macos-bundle:
-    name: Bundle - ${{ matrix.os }}
+  macos:
+    name: ${{ matrix.source }} - ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [macOS-10.15, macOS-11.0]
+        source: [bundle, homebrew, macports]
 
     steps:
       - name: Cancel Previous Runs
@@ -38,54 +39,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.4
 
-      - name: Install via Bundle
-        run: bash install-gmt-via-bundle.sh
-
-      - name: Run tests
-        run: bash test-gmt.sh
-
-  macos-homebrew:
-    name: Homebrew - ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macOS-10.15, macOS-11.0]
-
-    steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.6.0
-        with:
-          access_token: ${{ github.token }}
-
-      - name: Checkout
-        uses: actions/checkout@v2.3.4
-
-      - name: Install via Homebrew
-        run: bash install-gmt-via-homebrew.sh
-
-      - name: Run tests
-        run: bash test-gmt.sh
-
-  macos-macports:
-    name: MacPorts - ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macOS-10.15, macOS-11.0]
-
-    steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.6.0
-        with:
-          access_token: ${{ github.token }}
-
-      - name: Checkout
-        uses: actions/checkout@v2.3.4
-
-      - name: Install via MacPorts
-        run: bash install-gmt-via-macports.sh
+      - name: Install via ${{ matrix.source }}
+        run: bash install-gmt-via-${{ matrix.source }}.sh
 
       - name: Run tests
         run: bash test-gmt.sh
