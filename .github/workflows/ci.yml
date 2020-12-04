@@ -92,7 +92,7 @@ jobs:
       - name: Install via MacPorts
         run: |
           bash install-gmt-via-macports.sh
-          echo "/opt/local/bin" >> $GITHUB_PATH
+          echo "/opt/local/lib/gmt6/bin" >> $GITHUB_PATH
 
       - name: Run tests
         run: bash test-gmt.sh
