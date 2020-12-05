@@ -17,4 +17,10 @@ sudo hdiutil attach ${GMT_BUNDLE_FULLNAME}
 cp -rf /Volumes/${GMT_BUNDLE_NAME}/GMT-${GMT_VERSION}.app /Applications/GMT.app
 sudo hdiutil unmount /Volumes/${GMT_BUNDLE_NAME}
 
+# Add PATHs
+GMTHOME=/Applications/GMT.app/Contents/Resources
+echo "PROJ_LIB=${GMTHOME}/share/proj6" >> $GITHUB_ENV
+echo "MAGICK_CONFIGURE_PATH=${GMTHOME}/lib/GraphicsMagick/config" >> $GITHUB_ENV
+echo "${GMTHOME}/bin" >> $GITHUB_PATH
+
 set +x +e

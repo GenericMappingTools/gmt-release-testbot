@@ -1,7 +1,8 @@
-# This workflow tests GMT releases on various platforms
+# This workflow tests GMT installations on various platforms
 
 name: Test GMT releases
 
+# Run on master branch, PRs and scheduled times.
 on:
   push:
     branches:
@@ -16,18 +17,18 @@ env:
   GMT_VERSION: 6.1.1
   # disable auto-display of figures
   GMT_END_SHOW: off
+  # URL of the GMT Bundle
+  GMT_BUNDLE_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-darwin-x86_64.dmg
 
 jobs:
-  macos-bundle:
-    name: Bundle - ${{ matrix.os }}
+  macos:
+    name: ${{ matrix.source }} - ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [macOS-10.15, macOS-11.0]
-
-    env:
-      GMT_BUNDLE_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-darwin-x86_64.dmg
+        source: [bundle, homebrew, macports]
 
     steps:
       - name: Cancel Previous Runs
@@ -38,62 +39,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.4
 
-      - name: Install via Bundle
-        run: |
-          bash install-gmt-via-bundle.sh
-          GMTHOME=/Applications/GMT.app/Contents/Resources
-          echo "PROJ_LIB=${GMTHOME}/share/proj6" >> $GITHUB_ENV
-          echo "MAGICK_CONFIGURE_PATH=${GMTHOME}/lib/GraphicsMagick/config" >> $GITHUB_ENV
-          echo "${GMTHOME}/bin" >> $GITHUB_PATH
-
-      - name: Run tests
-        run: bash test-gmt.sh
-
-  macos-homebrew:
-    name: Homebrew - ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macOS-10.15, macOS-11.0]
-
-    steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.6.0
-        with:
-          access_token: ${{ github.token }}
-
-      - name: Checkout
-        uses: actions/checkout@v2.3.4
-
-      - name: Install via Homebrew
-        run: bash install-gmt-via-homebrew.sh
-
-      - name: Run tests
-        run: bash test-gmt.sh
-
-  macos-macports:
-    name: MacPorts - ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macOS-10.15, macOS-11.0]
-
-    steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.6.0
-        with:
-          access_token: ${{ github.token }}
-
-      - name: Checkout
-        uses: actions/checkout@v2.3.4
-
-      - name: Install via MacPorts
-        run: |
-          bash install-gmt-via-macports.sh
-          echo "/opt/local/bin" >> $GITHUB_PATH
-          echo "/opt/local/lib/gmt6/bin" >> $GITHUB_PATH
+      - name: Install via ${{ matrix.source }}
+        run: bash install-gmt-via-${{ matrix.source }}.sh
 
       - name: Run tests
         run: bash test-gmt.sh
@@ -135,7 +82,7 @@ jobs:
         run: test-gmt.bat
         if: runner.os == 'Windows'
 
-  docker-fedora:
+  docker:
     name: Docker - ${{ matrix.image }}
     runs-on: ubuntu-latest
     container:
@@ -143,7 +90,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image: ["fedora:32", "fedora:33", "fedora:rawhide"]
+        image: ["fedora:32", "fedora:33", "fedora:rawhide", "centos:7", "centos:8"]
 
     steps:
       - name: Cancel Previous Runs
@@ -156,49 +103,10 @@ jobs:
 
       - name: Install GMT
         run: |
-          dnf -yq install dnf-plugins-core
-          dnf -yq copr enable genericmappingtools/gmt
-          dnf -yq install gmt
-          dnf -yq install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-          dnf -yq install GraphicsMagick ffmpeg gdal
-
-      - name: Run tests
-        run: bash test-gmt.sh
-
-  docker-centos:
-    name: Docker - ${{ matrix.image }}
-    runs-on: ubuntu-latest
-    container:
-      image: ${{ matrix.image }}
-    strategy:
-      fail-fast: false
-      matrix:
-        image: ["centos:7", "centos:8"]
-
-    steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.6.0
-        with:
-          access_token: ${{ github.token }}
-
-      - name: Checkout
-        uses: actions/checkout@v2.3.4
-
-      - name: Install GMT
-        run: |
-            yum -yq install epel-release
-            yum -yq install yum-plugin-copr
-            yum -yq copr enable genericmappingtools/gmt
-
-            version=$(rpm -E %rhel)
-            # See https://github.com/GenericMappingTools/gmt/issues/3433
-            if [ "${version}" == "8" ]; then
-              yum config-manager --set-enabled PowerTools
-            fi
-
-            yum -yq install gmt
-            yum -yq localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-$(rpm -E %rhel).noarch.rpm
-            yum -yq install GraphicsMagick ffmpeg gdal
+          os=${DOCKER_IMAGE%%:*}  # convert "fedora:32" to fedora
+          bash install-gmt-${os}.sh
+        env:
+          DOCKER_IMAGE: ${{ matrix.image }}
 
       - name: Run tests
         run: bash test-gmt.sh
