@@ -7,7 +7,7 @@ set -x -e
 
 dnf -yq install dnf-plugins-core
 dnf -yq copr enable genericmappingtools/gmt
-dnf -yq install gmt
+dnf -y install gmt
 dnf -yq install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 dnf -yq install GraphicsMagick ffmpeg gdal
 
