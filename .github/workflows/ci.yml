@@ -103,8 +103,10 @@ jobs:
 
       - name: Install GMT
         run: |
-          os=${matrix.image%%:*}  # convert "fedora:32" to fedora
+          os=${DOCKER_IMAGE%%:*}  # convert "fedora:32" to fedora
           bash install-gmt-${os}.sh
+        env:
+          - DOCKER_IMAGE: ${{ matrix.image }}
 
       - name: Run tests
         run: bash test-gmt.sh
@@ -118,7 +120,7 @@ jobs:
         arch: ["win32", "win64"]
 
     env:
-      GMT_INSTALLER_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-${{ matrix.arch }}.exe
+      GMT_INSTALLER_URL: https://github.com/GenericMappingTools/gmt/releases/download/${{ env.GMT_VERSION }} /gmt-${{ env.GMT_VERSION }}-${{ matrix.arch }}.exe
 
     steps:
       - name: Cancel Previous Runs
