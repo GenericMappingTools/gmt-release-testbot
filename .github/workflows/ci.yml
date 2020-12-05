@@ -120,7 +120,7 @@ jobs:
         arch: ["win32", "win64"]
 
     env:
-      GMT_INSTALLER_URL: https://github.com/GenericMappingTools/gmt/releases/download/${{ env.GMT_VERSION }} /gmt-${{ env.GMT_VERSION }}-${{ matrix.arch }}.exe
+      GMT_INSTALLER_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-${{ matrix.arch }}.exe
 
     steps:
       - name: Cancel Previous Runs
