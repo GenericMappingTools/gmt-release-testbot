@@ -109,6 +109,8 @@ jobs:
           ls /usr/bin/gmt
           ls -lrh /usr/share/doc/*
           ls -lrh /usr/share/gmt/*
+          updatedb
+          locate gmt
         env:
           DOCKER_IMAGE: ${{ matrix.image }}
 
