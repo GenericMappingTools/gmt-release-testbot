@@ -170,9 +170,7 @@ jobs:
         shell: pwsh
         run: |
           (New-Object System.Net.WebClient).DownloadFile("https://github.com/microsoft/winget-cli/releases/download/v0.2.3162-preview/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.appxbundle", "DesktopAppInstaller.appx")
-          Expand-Archive DesktopAppInstaller.appx
-          Set-Location DesktopAppInstaller
-          Get-ChildItem
+          Add-AppxPackage DesktopAppInstaller.appx
 
       - name: Install GMT
         shell: cmd
