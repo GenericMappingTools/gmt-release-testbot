@@ -146,3 +146,41 @@ jobs:
         shell: cmd
         run: call test-gmt.bat
 
+  windows:
+    name: Windows - winget
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: ["win64"]
+
+    env:
+      GMT_INSTALLER_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-${{ matrix.arch }}.exe
+
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+
+      - name: Install winget
+        shell: pwsh
+        run: |
+          wget https://github.com/microsoft/winget-cli/releases/download/v0.2.3162-preview/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.appxbundle
+          add-appxpackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.appxbundle
+
+      - name: Install GMT
+        shell: cmd
+        run: winget install gmt
+
+      - name: Run tests
+        shell: bash
+        run: bash test-gmt.sh
+
+      - name: Run Batch tests
+        shell: cmd
+        run: call test-gmt.bat
+
