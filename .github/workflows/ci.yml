@@ -146,7 +146,7 @@ jobs:
         shell: cmd
         run: call test-gmt.bat
 
-  windows:
+  windows-winget:
     name: Windows - winget
     runs-on: windows-latest
     strategy:
