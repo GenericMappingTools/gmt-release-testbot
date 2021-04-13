@@ -5,6 +5,8 @@
 
 set -x -e
 
+gs --version
+
 # check GMT version
 [ "${GMT_VERSION}" == "$(gmt --version)" ]
 
