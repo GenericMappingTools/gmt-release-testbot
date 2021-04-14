@@ -14,7 +14,7 @@ on:
 
 env:
   # The GMT version we're testing
-  GMT_VERSION: 6.2.0rc1
+  GMT_VERSION: 6.2.0_eefd707_2021.04.06
   # disable auto-display of figures
   GMT_END_SHOW: off
   # URL of the GMT Bundle
