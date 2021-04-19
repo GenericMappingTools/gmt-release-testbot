@@ -14,102 +14,11 @@ on:
 
 env:
   # The GMT version we're testing
-  GMT_VERSION: 6.1.1
+  GMT_VERSION: 6.2.0_eefd707_2021.04.06
   # disable auto-display of figures
   GMT_END_SHOW: off
-  # URL of the GMT Bundle
-  GMT_BUNDLE_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-darwin-x86_64.dmg
 
 jobs:
-  macos:
-    name: ${{ matrix.source }} - ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macOS-10.15, macOS-11.0]
-        source: [bundle, homebrew, macports]
-
-    steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.6.0
-        with:
-          access_token: ${{ github.token }}
-
-      - name: Checkout
-        uses: actions/checkout@v2.3.4
-
-      - name: Install via ${{ matrix.source }}
-        run: bash install-gmt-via-${{ matrix.source }}.sh
-
-      - name: Run tests
-        run: bash test-gmt.sh
-
-  conda:
-    name: Conda - ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-
-    steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.6.0
-        with:
-          access_token: ${{ github.token }}
-
-      - name: Checkout
-        uses: actions/checkout@v2.3.4
-
-      - name: Setup Miniconda
-        uses: conda-incubator/setup-miniconda@v2.0.0
-        with:
-          python-version: 3.8
-          channels: conda-forge
-          miniconda-version: "latest"
-
-      - name: Install GMT
-        shell: bash -l {0}
-        run: conda install --yes gmt graphicsmagick
-
-      - name: Run tests
-        shell: bash -l {0}
-        run: bash test-gmt.sh
-
-      - name: Run Batch tests
-        shell: cmd /C CALL {0}
-        run: test-gmt.bat
-        if: runner.os == 'Windows'
-
-  docker:
-    name: Docker - ${{ matrix.image }}
-    runs-on: ubuntu-latest
-    container:
-      image: ${{ matrix.image }}
-    strategy:
-      fail-fast: false
-      matrix:
-        image: ["fedora:32", "fedora:33", "fedora:rawhide", "centos:7", "centos:8"]
-
-    steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.6.0
-        with:
-          access_token: ${{ github.token }}
-
-      - name: Checkout
-        uses: actions/checkout@v2.3.4
-
-      - name: Install GMT
-        run: |
-          os=${DOCKER_IMAGE%%:*}  # convert "fedora:32" to fedora
-          bash install-gmt-${os}.sh
-        env:
-          DOCKER_IMAGE: ${{ matrix.image }}
-
-      - name: Run tests
-        run: bash test-gmt.sh
 
   windows:
     name: Windows
@@ -117,11 +26,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        arch: ["win32", "win64"]
+        arch: ["win64"]
 
     env:
-      GMT_INSTALLER_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-${{ matrix.arch }}.exe
-
+      GMT_INSTALLER_URL: ftp://ftp.soest.hawaii.edu/gmt/bin/gmt-6.2.0rc1-win64.exe
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.6.0
