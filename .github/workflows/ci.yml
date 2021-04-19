@@ -44,5 +44,3 @@ jobs:
 
       - name: Run tests
         run: bash test-gmt.sh
-
-        run: bash test-gmt.sh
