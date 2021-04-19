@@ -105,6 +105,10 @@ jobs:
         run: |
           os=${DOCKER_IMAGE%%:*}  # convert "fedora:32" to fedora
           bash install-gmt-${os}.sh
+          which gmt
+          ls /usr/bin/gmt
+          ls -lrh /usr/share/doc/*
+          ls -lrh /usr/share/gmt/*
         env:
           DOCKER_IMAGE: ${{ matrix.image }}
 
