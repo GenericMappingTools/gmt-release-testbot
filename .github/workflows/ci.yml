@@ -54,7 +54,7 @@ jobs:
         arch: ["win64"]
 
     env:
-      GMT_INSTALLER_URL: GMT_INSTALLER_URL: ftp://ftp.soest.hawaii.edu/gmtrelease/gmt-6.2.0rc2-win64.exe
+      GMT_INSTALLER_URL: ftp://ftp.soest.hawaii.edu/gmtrelease/gmt-6.2.0rc2-win64.exe
 
     steps:
       - name: Cancel Previous Runs
