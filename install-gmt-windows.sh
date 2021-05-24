@@ -16,7 +16,7 @@ wget --quiet ${GMT_INSTALLER_URL}
 # Use 7z to extract the exe file directly and copy to C:\programs\gmt6
 7z x ${GMT_INSTALLER_FULLNAME}
 mkdir -p /c/programs/gmt6
-mv bin include lib share Uninstall.exe /c/programs/gmt6
+mv bin include lib share /c/programs/gmt6
 
 # Install graphicsmagick.
 choco install graphicsmagick
