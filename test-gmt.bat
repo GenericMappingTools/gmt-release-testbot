@@ -27,9 +27,9 @@ REM check local documentation
 gmt docs -Q coast
 
 REM check movie in MP4 and GIF format
-echo "gmt begin" > globe.bat
-echo "gmt coast -Rg -JG%%MOVIE_FRAME%%/20/%%MOVIE_WIDTH%% -Gmaroon -Sturquoise -Bg -X0 -Y0" >> globe.bat
-echo "gmt end" >> globe.bat
-gmt movie globe.bat -Nglobe -T12 -Fmp4 -Agif -C6ix6ix100 -Lf -Vd
+echo "gmt begin" > globe_batch.bat
+echo "gmt coast -Rg -JG%%MOVIE_FRAME%%/20/%%MOVIE_WIDTH%% -Gmaroon -Sturquoise -Bg -X0 -Y0" >> globe_batch.bat
+echo "gmt end" >> globe_batch.bat
+gmt movie globe_batch.bat -Nglobe_batch -T12 -Fmp4 -Agif -C6ix6ix100 -Lf -Vd
 
 @echo off
