@@ -7,10 +7,10 @@ set -x -e
 
 # Install macports
 macos_version=$(sw_vers -productVersion)
-if [[ "$macos_version" =~ "11.0" ]]; then
-	pkg="https://distfiles.macports.org/MacPorts/MacPorts-2.6.4_1-11-BigSur.pkg"
+if [[ "$macos_version" =~ "11" ]]; then
+	pkg="https://github.com/macports/macports-base/releases/download/v2.7.1/MacPorts-2.7.1-11-BigSur.pkg"
 elif [[ "$macos_version" =~ "10.15" ]]; then
-	pkg="https://distfiles.macports.org/MacPorts/MacPorts-2.6.4-10.15-Catalina.pkg"
+	pkg="https://github.com/macports/macports-base/releases/download/v2.7.1/MacPorts-2.7.1-10.15-Catalina.pkg"
 else
 	echo "macOS version ${macos_version} not supported."
 	exit 1

@@ -14,11 +14,11 @@ on:
 
 env:
   # The GMT version we're testing
-  GMT_VERSION: 6.1.1
+  GMT_VERSION: 6.2.0
   # disable auto-display of figures
   GMT_END_SHOW: off
   # URL of the GMT Bundle
-  GMT_BUNDLE_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-darwin-x86_64.dmg
+  GMT_BUNDLE_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.2.0/gmt-6.2.0-darwin-x86_64.dmg
 
 jobs:
   macos:
@@ -90,7 +90,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image: ["fedora:32", "fedora:33", "fedora:rawhide", "centos:7", "centos:8"]
+        image: ["fedora:33", "fedora:34", "fedora:rawhide", "centos:7", "centos:8"]
 
     steps:
       - name: Cancel Previous Runs
@@ -120,7 +120,7 @@ jobs:
         arch: ["win32", "win64"]
 
     env:
-      GMT_INSTALLER_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.1.1/gmt-6.1.1-${{ matrix.arch }}.exe
+      GMT_INSTALLER_URL: https://github.com/GenericMappingTools/gmt/releases/download/6.2.0/gmt-6.2.0-${{ matrix.arch }}.exe
 
     steps:
       - name: Cancel Previous Runs
