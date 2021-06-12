@@ -10,7 +10,7 @@ yum -yq copr enable genericmappingtools/gmt
 
 # See https://github.com/GenericMappingTools/gmt/issues/3433
 if [ "$(rpm -E %rhel)" == "8" ]; then
-    yum config-manager --set-enabled PowerTools
+    yum config-manager --set-enabled powertools
 fi
 
 yum -yq install gmt

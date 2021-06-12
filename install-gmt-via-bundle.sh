@@ -20,6 +20,7 @@ sudo hdiutil unmount /Volumes/${GMT_BUNDLE_NAME}
 # Add PATHs
 GMTHOME=/Applications/GMT.app/Contents/Resources
 echo "PROJ_LIB=${GMTHOME}/share/proj6" >> $GITHUB_ENV
+echo "GS_LIB=${GMTHOME}/share/ghostscript/9.53.3/Resource/Init" >> $GITHUB_ENV
 echo "MAGICK_CONFIGURE_PATH=${GMTHOME}/lib/GraphicsMagick/config" >> $GITHUB_ENV
 echo "${GMTHOME}/bin" >> $GITHUB_PATH
 
