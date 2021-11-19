@@ -15,7 +15,7 @@ on:
 env:
   # The GMT version we're testing
   GMT_VERSION: 6.3.0
-  # disable auto-display of figures
+  # Disable auto-display of figures
   GMT_END_SHOW: off
   # URL of the GMT Bundle
   GMT_BUNDLE_URL: ftp://ftp.soest.hawaii.edu/gmtrelease/gmt-6.3.0-darwin-x86_64.dmg
