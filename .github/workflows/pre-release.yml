@@ -1,0 +1,81 @@
+# This workflow tests GMT installations on various platforms
+
+name: Test GMT releases
+
+# Run on master branch, PRs and scheduled times.
+on:
+  # push:
+  #   branches:
+  #   - master
+  pull_request:
+  # weekly schedule job
+  # schedule:
+  # - cron: '0 0 * * 0'
+
+env:
+  # The GMT version we're testing
+  GMT_VERSION: 6.4.0
+  # disable auto-display of figures
+  GMT_END_SHOW: off
+  # URL of the GMT Bundle
+  GMT_BUNDLE_URL: ftp://ftp.soest.hawaii.edu/release/gmt-6.4.0-darwin-x86_64.dmg
+
+jobs:
+  macos:
+    name: ${{ matrix.source }} - ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macOS-10.15, macOS-11.0]
+        source: [bundle]
+
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+
+      - name: Install via ${{ matrix.source }}
+        run: bash install-gmt-via-${{ matrix.source }}.sh
+
+      - name: Run tests
+        run: bash test-gmt.sh
+
+  windows:
+    name: Windows
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: ["win32", "win64"]
+
+    env:
+      GMT_INSTALLER_URL: ftp://ftp.soest.hawaii.edu/gmtrelease/gmt-6.4.0-${{ matrix.arch }}.exe
+
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+
+      - name: Install GMT
+        shell: bash
+        run: |
+          bash install-gmt-windows.sh
+          echo "C:/programs/gmt6/bin" >> $GITHUB_PATH
+          echo "C:/Program Files/GraphicsMagick-1.3.32-Q8" >> $GITHUB_PATH
+
+      - name: Run tests
+        shell: bash
+        run: bash test-gmt.sh
+
+      - name: Run Batch tests
+        shell: cmd
+        run: call test-gmt.bat
