@@ -7,8 +7,8 @@ on:
   push:
     branches:
     - master
-  pull_request:
-  # weekly schedule job
+  # pull_request:
+  # # weekly schedule job
   schedule:
   - cron: '0 0 * * 0'
 
