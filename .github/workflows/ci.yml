@@ -142,7 +142,7 @@ jobs:
         shell: bash
         run: bash test-gmt.sh
 
-      - name: Run Batch tests
-        shell: cmd
-        run: call test-gmt.bat
+      # - name: Run Batch tests
+      #   shell: cmd
+      #   run: call test-gmt.bat
 
