@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macOS-10.15, macOS-11.0]
+        os: [macOS-12]
         source: [bundle, homebrew, macports]
 
     steps:
