@@ -25,6 +25,13 @@ gmt coast -R0/10/0/10 -JM6i -Ba -Ggray -ENG+p1p,blue -Vd
 gmt end
 if [ "${RUNNER_OS}" == "Windows" ]; then unset GMT_SESSION_NAME; fi
 
+# check DCW collections
+if [ "${RUNNER_OS}" == "Windows" ]; then export GMT_SESSION_NAME=$$; fi
+gmt begin
+    gmt coast -Ritaly -B -Ggreen
+gmt end
+if [ "${RUNNER_OS}" == "Windows" ]; then unset GMT_SESSION_NAME; fi
+
 # check remote file, one-liner
 gmt grdimage @earth_relief_01d -JH10c -Baf -pdf map
 
